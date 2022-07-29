@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-char *get_env(char *s);
+char *get_env(char *s, char **env);
 char **get_key_value(char *s);
 /**
  * main - Prints the directories of PATH environment variable
@@ -75,10 +75,9 @@ char *get_env(char *s, char **env)
  */
 char **get_key_value(char *s)
 {
-	size_t key_size = 40, value_size = 1024;
+	size_t key_size = 40, value_size = 1024, i = 0, j = 0;
 	char *key = malloc(sizeof(char) * key_size);
 	char *value = malloc(sizeof(char) * value_size);
-	int i = 0, j = 0;
 	char **argv = malloc(sizeof(char *) * 3);
 
 	if (argv == NULL || key == NULL || value == NULL)
