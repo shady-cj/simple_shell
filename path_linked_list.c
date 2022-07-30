@@ -19,7 +19,7 @@ void print_path(path_dir *);
  * Return: int
  */
 int main(int __attribute__((unused)) argc,
-	char** __attribute__((unused)) argv,
+	char __attribute__((unused)) **argv,
 	char **env
 	)
 {
@@ -37,7 +37,9 @@ int main(int __attribute__((unused)) argc,
 		i++;
 	}
 	print_path(head);
+	return (0);
 }
+
 /**
  * get_env - The get_env function gets the environment variable
  * value
@@ -139,7 +141,7 @@ char **split_path(char *s)
 {
 	char **argv = NULL;
 	char *s_ptr = s;
-	size_t i = 0, j = 0, buf_size_i = 40, buf_size_j = 40;
+	ssize_t i = 0, j = 0, buf_size_i = 40, buf_size_j = 40;
 	
 	argv = malloc(sizeof(char *) * buf_size_i);
 	if (argv == NULL)
