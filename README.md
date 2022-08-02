@@ -2,7 +2,7 @@
 
 ## INTRODUCTION
 
-The linux operating system is a very popular and powerful operating system with a lot of powerful features which is why it is the most used in fields like devops, cybersecurity, hacking etc... There are different distributions in which some of this distributions have sub distributions... An example is of Linux distro is **UBUNTU** which in turn has sub distros such as _Lubuntu_ and _Xubuntu_.
+The linux operating system is a very popular and powerful operating system with a lot of powerful features which is why it is the most used in fields like devops, cybersecurity, hacking etc... There are different distributions of Linux OS in which some of this distributions have sub distributions... An example of a Linux distro is **UBUNTU** which in turn has sub distros such as _Lubuntu_ and _Xubuntu_.
 This Project is about building a linux shell similar to the traditional linux terminal.. With a lot of functionality although not all.. using **C** programming Language.
 
 This project combines different concept from C programming ranging from reading files, taking inputsz reading directories etc...
@@ -14,7 +14,6 @@ To simply run this project and get it running.. Make sure all the files are in t
 ```
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o shell
 ./shell
-
 ```
 
 ## GETTING TO KNOW THE FILES
