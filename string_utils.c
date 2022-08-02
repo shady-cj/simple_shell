@@ -68,6 +68,7 @@ char **split(char *buffer)
 		{
                         if (!found)
                         {
+				argv[i][j] = '\0';
                                 i++;
                                 argv[i] = alloc_str_arr(buf_size_j, argv,
 						i, 0);

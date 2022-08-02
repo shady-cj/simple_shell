@@ -10,6 +10,7 @@ void (*map_cmd(char *str))(char **argv)
 
 	cmd args[] = {
 		{"cd", handle_cd},
+		{"exit", handle_exit},
 		{NULL, NULL}
 	};
 	while (args[i].cmd_type)

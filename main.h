@@ -25,6 +25,7 @@ typedef struct cmd_opt
  * Commands Helper functions
  */
 void handle_cd(char **argv);
+void handle_exit(char **argv);
 
 
 void (*map_cmd(char *str))(char **argv);
@@ -45,7 +46,7 @@ char *alloc_str_arr(size_t size, char **arr, size_t idx, int type);
 /**
  * Resetting
  */
-void re_initializer(char *buffer, size_t *buf_size, size_t *i);
+void re_initializer(char *buffer, size_t *buf_size, size_t *i, int interactive);
 
 /**
  * Main Shell Function

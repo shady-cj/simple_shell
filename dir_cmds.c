@@ -11,11 +11,31 @@
 void handle_cd(char **argv)
 {
 	int ret;
+	char cwd[1024];
+	char oldcwd[1024];
 
-	ret = chdir(argv[1]);
+	if (getcwd(oldcwd, sizeof(oldcwd)) == NULL)
+		perror("error");
+	if (argv[1] == NULL)
+		ret = chdir(getenv("HOME"));
+	else if (strcmp(argv[1], "-\0") == 0)
+	{
+		printf("%s\n", getenv("OLDPWD"));
+		ret = chdir(getenv("OLDPWD"));
+	}
+	else
+		ret = chdir(argv[1]);
 	if (ret != 0)
 	{
 		printf("bash: %s: %s:", argv[0], argv[1]);
 		printf("No such file or directory\n");
+	}
+	else
+	{
+		setenv("OLDPWD", oldcwd, 1);
+		if (getcwd(cwd, sizeof(cwd)) == NULL)
+			perror("error");
+		else
+			setenv("PWD", cwd, 1);
 	}
 }
