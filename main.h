@@ -48,7 +48,7 @@ char *alloc_str_arr(size_t size, char **arr, size_t idx, int type);
 /**
  * Resetting
  */
-void re_initializer(char *buffer, size_t *buf_size, size_t *i, int interactive);
+void re_initializer(char **buffer, size_t *buf_size, size_t *i, int interactive);
 
 /**
  * Main Shell Function

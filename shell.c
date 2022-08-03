@@ -27,7 +27,7 @@ void shell(void)
 			buffer = strip(buffer, i);
 			if (strlen(buffer) == 0)
 			{
-				re_initializer(buffer, &buf_size, &i, interactive);
+				re_initializer(&buffer, &buf_size, &i, interactive);
 				continue;
 			}
 			argv = split(buffer);
@@ -52,7 +52,7 @@ void shell(void)
 					wait(NULL);
 				}
 			}
-			re_initializer(buffer, &buf_size, &i, interactive);
+			re_initializer(&buffer, &buf_size, &i, interactive);
 			continue;
 		}
 		if (c == EOF)
@@ -69,6 +69,8 @@ void shell(void)
 		buffer[i] = c;
 		i++;
 	} while (feof(stdin) == 0);
+	free(buffer);
+	buffer = NULL;
 }
 
 /**
@@ -81,12 +83,12 @@ void shell(void)
  * @sh: To check if it's called in interactive mode or not
  * Return: void
  */
-void re_initializer(char *buffer, size_t *buf_size, size_t *i, int sh)
+void re_initializer(char **buffer, size_t *buf_size, size_t *i, int sh)
 {
-	free(buffer);
+	free(*buffer);
 	*buf_size = 40;
 	*i = 0;
-	buffer = alloc_str(*buf_size);
+	*buffer = alloc_str(*buf_size);
 	if (sh)
 		printf("$ ");
 }
