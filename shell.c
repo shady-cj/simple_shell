@@ -104,6 +104,8 @@ void handle_z(int __attribute__((unused))sig)
 void handle_SIGINT(int __attribute__((unused))sig)
 {
 	free_buffer();
+	printf("\n");
+	fflush(stdout);
 	exit(130);
 
 }
