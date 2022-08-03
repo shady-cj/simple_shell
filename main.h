@@ -27,6 +27,8 @@ typedef struct cmd_opt
  */
 void handle_cd(char **argv);
 void handle_exit(char **argv);
+void handle_setenv(char **argv);
+void handle_unsetenv(char **argv);
 
 
 void (*map_cmd(char *str))(char **argv);
@@ -42,12 +44,13 @@ char **split(char *buffer);
 char *alloc_str(size_t size);
 char *realloc_str(char *buffer, size_t size);
 char *alloc_str_arr(size_t size, char **arr, size_t idx, int type);
+void free_args(char **argv);
 
 
 /**
  * Resetting
  */
-void re_initializer(char *buffer, size_t *buf_size, size_t *i, int interactive);
+void re_initializer(char **buffer, size_t *buf_size, size_t *i, int interactive);
 
 /**
  * Main Shell Function

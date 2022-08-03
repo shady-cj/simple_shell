@@ -73,3 +73,18 @@ char *alloc_str_arr(size_t size, char **arr, size_t idx, int type)
 	}
 	return (new_str);
 }
+
+
+void free_args(char **argv)
+{
+	int i = 0;
+
+	while (argv[i])
+	{
+		free(argv[i]);
+		i++;
+	}
+
+	free(argv);
+	argv = NULL;
+}
