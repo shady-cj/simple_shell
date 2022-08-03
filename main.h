@@ -43,6 +43,7 @@ char **split(char *buffer);
 char *alloc_str(size_t size);
 char *realloc_str(char *buffer, size_t size);
 char *alloc_str_arr(size_t size, char **arr, size_t idx, int type);
+void free_args(char **argv);
 
 
 /**

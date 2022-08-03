@@ -53,6 +53,7 @@ void shell(void)
 				}
 			}
 			re_initializer(&buffer, &buf_size, &i, interactive);
+			free_args(argv);
 			continue;
 		}
 		if (c == EOF)
@@ -70,6 +71,7 @@ void shell(void)
 		i++;
 	} while (feof(stdin) == 0);
 	free(buffer);
+	free_args(argv);
 	buffer = NULL;
 }
 
