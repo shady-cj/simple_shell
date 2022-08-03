@@ -1,5 +1,7 @@
 #include "main.h"
 
+int EXIT_CODE_STATUS = 0;
+
 char *buffer;
 void handle_z(int sig);
 
@@ -21,6 +23,7 @@ void shell(void)
 
 	signal(SIGTSTP, &handle_z);
 	signal(SIGINT, &handle_SIGINT);
+	signal(SIGTERM, &handle_SIGTERM);
 	buffer = alloc_str(buf_size);
 	if (interactive)
 		printf("$ ");
@@ -48,6 +51,8 @@ void shell(void)
 					if (execvpe(argv[0], argv, environ) == -1)
 					{
 						perror("./shell");
+						free_args(argv);
+						free_buffer();
 						exit(0);
 					}
 				}
@@ -115,6 +120,11 @@ void handle_SIGINT(int __attribute__((unused))sig)
 
 }
 
+void handle_SIGTERM(int __attribute__((unused))sig)
+{
+	free_buffer();
+	exit(EXIT_CODE_STATUS);
+}
 
 void free_buffer(void)
 {

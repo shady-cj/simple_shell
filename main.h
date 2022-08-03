@@ -10,6 +10,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <signal.h>
+
 /**
  * struct cmd_opt - Defines a set of other commands that cannot be taken care
  * of by the exec functions
@@ -59,4 +60,5 @@ void re_initializer(size_t *buf_size, size_t *i, int interactive);
 void shell(void);
 void free_buffer(void);
 void handle_SIGINT(int __attribute__((unused))sig);
+void handle_SIGTERM(int __attribute__((unused))sig);
 #endif
