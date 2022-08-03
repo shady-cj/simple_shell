@@ -15,7 +15,12 @@ To simply run this project and get it running.. Make sure all the files are in t
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o shell
 ./shell
 ```
-
+or 
+Simply Run the executable file compile.sh
+```
+./compile.sh
+./shell
+```
 ## GETTING TO KNOW THE FILES
  * main.c - This file contains main function that contains the main() function.. The function calls the shell() function
  * shell.c - This file contains a function that embodies the main shell... This function initiates the call to other helper functions in order for the shell to be function

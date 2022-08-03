@@ -26,6 +26,8 @@ typedef struct cmd_opt
  */
 void handle_cd(char **argv);
 void handle_exit(char **argv);
+void handle_setenv(char **argv);
+void handle_unsetenv(char **argv);
 
 
 void (*map_cmd(char *str))(char **argv);
