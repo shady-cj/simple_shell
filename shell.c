@@ -1,5 +1,8 @@
 #include "main.h"
 
+char *buffer;
+void handle_z(int sig);
+
 /**
  * shell - This is the main function that implements the shell takes in
  * no arguments
@@ -10,13 +13,14 @@
 
 void shell(void)
 {
-	char *buffer;
 	size_t buf_size = 40, i = 0;
 	signed char c;
 	char **argv;
 	int child_p, interactive = isatty(STDIN_FILENO);
 	void (*func)(char **);
 
+	signal(SIGTSTP, &handle_z);
+	signal(SIGINT, &handle_SIGINT);
 	buffer = alloc_str(buf_size);
 	if (interactive)
 		printf("$ ");
@@ -27,7 +31,7 @@ void shell(void)
 			buffer = strip(buffer, i);
 			if (strlen(buffer) == 0)
 			{
-				re_initializer(&buffer, &buf_size, &i, interactive);
+				re_initializer(&buf_size, &i, interactive);
 				continue;
 			}
 			argv = split(buffer);
@@ -44,7 +48,7 @@ void shell(void)
 					if (execvpe(argv[0], argv, environ) == -1)
 					{
 						perror("./shell");
-						exit(1);
+						exit(0);
 					}
 				}
 				else
@@ -52,7 +56,7 @@ void shell(void)
 					wait(NULL);
 				}
 			}
-			re_initializer(&buffer, &buf_size, &i, interactive);
+			re_initializer(&buf_size, &i, interactive);
 			free_args(argv);
 			continue;
 		}
@@ -70,8 +74,7 @@ void shell(void)
 		buffer[i] = c;
 		i++;
 	} while (feof(stdin) == 0);
-	free(buffer);
-	buffer = NULL;
+	free_buffer();
 }
 
 /**
@@ -84,12 +87,30 @@ void shell(void)
  * @sh: To check if it's called in interactive mode or not
  * Return: void
  */
-void re_initializer(char **buffer, size_t *buf_size, size_t *i, int sh)
+void re_initializer(size_t *buf_size, size_t *i, int sh)
 {
-	free(*buffer);
+	free_buffer();
 	*buf_size = 40;
 	*i = 0;
-	*buffer = alloc_str(*buf_size);
+	buffer = alloc_str(*buf_size);
 	if (sh)
 		printf("$ ");
+}
+
+void handle_z(int __attribute__((unused))sig)
+{
+	return;
+}
+void handle_SIGINT(int __attribute__((unused))sig)
+{
+	free_buffer();
+	exit(130);
+
+}
+
+
+void free_buffer(void)
+{
+	free(buffer);
+	buffer = NULL;
 }

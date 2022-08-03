@@ -74,7 +74,11 @@ char *alloc_str_arr(size_t size, char **arr, size_t idx, int type)
 	return (new_str);
 }
 
-
+/**
+ * free_args - Helps to free array of strings previously allocated
+ * @args: The array of strings
+ * Return: void
+ */
 void free_args(char **argv)
 {
 	int i = 0;
