@@ -74,7 +74,10 @@ void shell(void)
 		buffer[i] = c;
 		i++;
 	} while (feof(stdin) == 0);
+
+	printf("called");
 	free_buffer();
+	printf("called");
 }
 
 /**
@@ -99,6 +102,8 @@ void re_initializer(size_t *buf_size, size_t *i, int sh)
 
 void handle_z(int __attribute__((unused))sig)
 {
+	printf("\n$ ");
+	fflush(stdout);
 	return;
 }
 void handle_SIGINT(int __attribute__((unused))sig)
