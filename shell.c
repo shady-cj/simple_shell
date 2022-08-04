@@ -1,8 +1,8 @@
 #include "main.h"
 
-char *buffer;
-char **argv;
-int exit_code;
+char *buffer = NULL;
+char **argv = NULL;
+int exit_code = 0;
 void handle_z(int sig);
 
 /**
