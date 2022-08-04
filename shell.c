@@ -1,8 +1,8 @@
 #include "main.h"
 
-int EXIT_CODE_STATUS = 0;
-
 char *buffer;
+char **argv;
+int exit_code;
 void handle_z(int sig);
 
 /**
@@ -17,7 +17,6 @@ void shell(void)
 {
 	size_t buf_size = 40, i = 0;
 	signed char c;
-	char **argv;
 	int child_p, interactive = isatty(STDIN_FILENO);
 	void (*func)(char **);
 
@@ -123,7 +122,9 @@ void handle_SIGINT(int __attribute__((unused))sig)
 void handle_SIGTERM(int __attribute__((unused))sig)
 {
 	free_buffer();
-	exit(EXIT_CODE_STATUS);
+	exit_code = argv[1] ? atoi(argv[1]) : 0;
+	free_args(argv);
+	exit(exit_code);
 }
 
 void free_buffer(void)

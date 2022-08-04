@@ -10,6 +10,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <signal.h>
+#define EXIT_CODE_STATUS 0
 
 /**
  * struct cmd_opt - Defines a set of other commands that cannot be taken care

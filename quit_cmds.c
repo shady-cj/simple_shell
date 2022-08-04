@@ -12,8 +12,5 @@
 
 void handle_exit(char __attribute__((unused))**argv)
 {
-	if (argv[1])
-		EXIT_CODE_STATUS = atoi(argv[1]);
-	printf("%d %s", EXIT_CODE_STATUS);
 	kill(getpid(), SIGTERM);
 }
