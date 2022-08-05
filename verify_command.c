@@ -13,7 +13,7 @@ int get_cmd_from_path(char *cmd)
 	int i = 0;
 
 	path_dir *head = NULL;
-	s = get_env("PATH");
+	s = getenv("PATH");
 	dirs = split_path(s);
 	while (dirs[i])
 	{
@@ -62,8 +62,8 @@ char **split_path(char *s)
 	}
 	argv[i][j] = '\0';
 	argv[++i] = NULL;
-	free(s);
-	s = NULL;
+	/**free(s);
+	s = NULL;**/
 	return (argv);
 }
 
@@ -125,6 +125,7 @@ int check_path(path_dir *head, char *cmd)
 		memcpy(s, ptr->dir, strlen(ptr->dir) + 1);
 		strcat(s, "/\0");
 		strcat(s, cmd);
+		printf("%s\n cmd %s \n", s, cmd);
 		if (stat(cmd, &st) == 0 || stat(s, &st) == 0)
 		{
 			free_linked_path(head);

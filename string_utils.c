@@ -94,6 +94,7 @@ char **split(char *buffer)
                 }
 		s++;
 	}
+	printf("%s\n", argv[0]);
 	argv[++i] = NULL;
 	return (argv);
 }
