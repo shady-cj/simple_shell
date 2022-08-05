@@ -17,7 +17,7 @@ void shell(void)
 {
 	size_t buf_size = 40, i = 0;
 	signed char c;
-	int child_p, interactive = isatty(STDIN_FILENO);
+	int v_cmd, child_p, interactive = isatty(STDIN_FILENO);
 	void (*func)(char **);
 
 	signal(SIGTSTP, &handle_z);
@@ -44,6 +44,15 @@ void shell(void)
 			}
 			else
 			{
+				v_cmd = get_cmd_from_path(argv[0]);
+				if (v_cmd == 0)
+				{
+					fprintf(stderr, "bash: %s: ", argv[0]);
+					fprintf(stderr, "command not found\n");
+					re_initializer(&buf_size, &i, interactive);
+					free_args(argv);
+					continue;
+				}
 				child_p = fork();
 				if (child_p == 0)
 				{
@@ -78,10 +87,7 @@ void shell(void)
 		buffer[i] = c;
 		i++;
 	} while (feof(stdin) == 0);
-
-	printf("called");
 	free_buffer();
-	printf("called");
 }
 
 /**
@@ -108,15 +114,11 @@ void handle_z(int __attribute__((unused))sig)
 {
 	printf("\n$ ");
 	fflush(stdout);
-	return;
 }
 void handle_SIGINT(int __attribute__((unused))sig)
 {
-	free_buffer();
-	printf("\n");
+	printf("\n$ ");
 	fflush(stdout);
-	exit(130);
-
 }
 
 void handle_SIGTERM(int __attribute__((unused))sig)

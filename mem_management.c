@@ -38,6 +38,7 @@ char *realloc_str(char *buffer, size_t size)
 	if (new_buffer == NULL)
 	{
 		free(buffer);
+		buffer = NULL;
 		exit(1);
 	}
 	return (new_buffer);
@@ -50,7 +51,7 @@ char *realloc_str(char *buffer, size_t size)
  * @size: The size of the new string
  * @arr: The main array that contains the array of strings
  * @idx: The current index to allocate the string
- * @type: The type of allocation
+ * @type: The type of allocation 0 for malloc 1 for realloc
  * Return: on Success returns a pointer to the newly reallocate memory location
  */
 char *alloc_str_arr(size_t size, char **arr, size_t idx, int type)
@@ -66,9 +67,11 @@ char *alloc_str_arr(size_t size, char **arr, size_t idx, int type)
 		while (idx != 0)
 		{
 			free(arr[idx]);
-			idx++;
+			idx--;
 		}
 		free(arr[idx]);
+		free(arr);
+		arr = NULL;
 		exit(1);
 	}
 	return (new_str);

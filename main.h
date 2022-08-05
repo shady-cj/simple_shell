@@ -10,8 +10,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <signal.h>
-#define EXIT_CODE_STATUS 0
-
 /**
  * struct cmd_opt - Defines a set of other commands that cannot be taken care
  * of by the exec functions
@@ -39,6 +37,32 @@ void (*map_cmd(char *str))(char **argv);
  */
 char *strip(char *buffer, size_t size);
 char **split(char *buffer);
+
+
+/**
+ *
+ * Environment Variables and Checking Paths and creating
+ * Linked Lists from the PATH env variable
+ *
+ */
+/**
+ * struct path - Creates a structure for the directories present in the PATH
+ * environment variables
+ * @dir: The actual directory.
+ * @link: A pointer to the next directory
+ */
+typedef struct path {
+	char *dir;
+	struct path *link;
+} path_dir;
+path_dir *add_path(path_dir **head, char *str);
+char *get_env(char *s);
+char **get_key_value(char *s);
+char **split_path(char *s);
+int check_path(path_dir *head, char *cmd);
+int get_cmd_from_path(char *cmd);
+void free_linked_path(path_dir *head);
+
 
 /**
  * Memory Management
