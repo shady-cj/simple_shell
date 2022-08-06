@@ -17,7 +17,7 @@ void shell(void)
 {
 	size_t buf_size = 40, i = 0;
 	signed char c;
-	int v_cmd, child_p, interactive = isatty(STDIN_FILENO);
+	int v_cmd, child_p, isdir, interactive = isatty(STDIN_FILENO);
 	void (*func)(char **);
 
 	signal(SIGTSTP, &handle_z);
@@ -45,10 +45,14 @@ void shell(void)
 			else
 			{
 				v_cmd = get_cmd_from_path(argv[0]);
+				isdir = is_dir_check(argv[0]);
 				if (v_cmd == 0)
 				{
 					fprintf(stderr, "bash: %s: ", argv[0]);
-					fprintf(stderr, "command not found\n");
+					if (isdir)
+						fprintf(stderr, "No such file or directory\n");
+					else
+						fprintf(stderr, "command not found\n");
 					re_initializer(&buf_size, &i, interactive);
 					free_args(argv);
 					continue;
@@ -133,4 +137,18 @@ void free_buffer(void)
 {
 	free(buffer);
 	buffer = NULL;
+}
+
+
+int is_dir_check(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		if (str[i] == '/')
+			return (1);
+		i++;
+	}
+	return (0);
 }

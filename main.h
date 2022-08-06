@@ -86,4 +86,6 @@ void shell(void);
 void free_buffer(void);
 void handle_SIGINT(int __attribute__((unused))sig);
 void handle_SIGTERM(int __attribute__((unused))sig);
+int is_dir_check(char *str);
+
 #endif
