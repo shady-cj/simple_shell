@@ -66,7 +66,7 @@ char **get_key_value(char *s)
 		if (j == value_size)
 		{
 			value_size += 1024;
-			
+			value = increase_value_size(value, argv, value_size);
 		}
 		value[j] = s[i];
 		j++;

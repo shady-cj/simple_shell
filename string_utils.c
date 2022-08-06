@@ -49,7 +49,7 @@ char **split(char *buffer)
 {
 	char *s = buffer;
 	char **argv;
-	size_t buf_size_i = 20, buf_size_j = 20, i = 0, j = 0;
+	size_t buf_size_i = 120, buf_size_j = 20, i = 0, j = 0;
 	char d = ' ';
 	int found = 0;
 
@@ -59,11 +59,6 @@ char **split(char *buffer)
         argv[i] = alloc_str_arr(buf_size_j, argv, i, 0);
         while (*s)
         {
-		if (i == buf_size_i)
-		{
-			buf_size_i += 20;
-			argv = realloc(argv, buf_size_i);
-		}
                 if (*s == d)
 		{
                         if (!found)
@@ -94,7 +89,7 @@ char **split(char *buffer)
                 }
 		s++;
 	}
-	printf("%s\n", argv[0]);
+	argv[i][j] = '\0';
 	argv[++i] = NULL;
 	return (argv);
 }

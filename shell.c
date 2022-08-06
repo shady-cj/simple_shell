@@ -31,14 +31,12 @@ void shell(void)
 		if (c == '\n')
 		{
 			buffer = strip(buffer, i);
-			printf("%s\n", buffer);
 			if (strlen(buffer) == 0)
 			{
 				re_initializer(&buf_size, &i, interactive);
 				continue;
 			}
 			argv = split(buffer);
-			printf("%s %s\n", argv[0], argv[1]);
 			func = map_cmd(argv[0]);
 			if (func != NULL)
 			{

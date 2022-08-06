@@ -30,7 +30,7 @@ void handle_setenv(char **argv)
 
 void handle_unsetenv(char **argv)
 {
-	if (argv[1] == NULL || argv[2] == NULL)
+	if (argv[1] == NULL)
 		fprintf(stderr, "Err: ");
 	if (unsetenv(argv[1]) != 0)
 	{
