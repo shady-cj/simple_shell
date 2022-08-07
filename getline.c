@@ -5,7 +5,14 @@
  *
  */
 
-
+/**
+ * _getline - This gets the input from the standard input thus implementing
+ * the getline function
+ * @buffer: The buffer to write into
+ * @buf_size: The size of the buffer
+ * @stream: The file stream in this case standard output
+ * Return: The amount of bytes written
+ */
 ssize_t _getline(char **buffer, size_t *buf_size, FILE *stream)
 {
 	static ssize_t input;
@@ -19,7 +26,10 @@ ssize_t _getline(char **buffer, size_t *buf_size, FILE *stream)
 	do {
 		ret = read(STDIN_FILENO, &c, 1);
 		if (ret == -1 || (input == 0 && ret == 0))
+		{
+			free(str);
 			return (-1);
+		}
 		if (c == '\n' || ret == 0)
 		{
 			continue;
