@@ -16,20 +16,26 @@ void handle_z(int sig);
 void shell(void)
 {
 	size_t buf_size = 40, i = 0;
-	signed char c;
+	ssize_t ret_input;
 	int v_cmd, child_p, isdir, interactive = isatty(STDIN_FILENO);
 	void (*func)(char **);
 
 	signal(SIGTSTP, &handle_z);
 	signal(SIGINT, &handle_SIGINT);
 	signal(SIGTERM, &handle_SIGTERM);
-	buffer = alloc_str(buf_size);
 	if (interactive)
 		printf("$ ");
 	do {
-		c = getc(stdin);
-		if (c == '\n')
+		ret_input = _getline(&buffer, &buf_size, stdout);
+		if (ret_input == EOF)
 		{
+			if (interactive)
+				printf("\n");
+			continue;
+		}	
+		else
+		{
+			i = ret_input;
 			buffer = strip(buffer, i);
 			if (strlen(buffer) == 0)
 			{
@@ -77,20 +83,7 @@ void shell(void)
 			free_args(argv);
 			continue;
 		}
-		if (c == EOF)
-		{
-			if (interactive)
-				printf("\n");
-			continue;
-		}
-		if (i == buf_size)
-		{
-			buf_size += 40;
-			buffer = realloc_str(buffer, buf_size);
-		}
-		buffer[i] = c;
-		i++;
-	} while (feof(stdin) == 0);
+	} while (ret_input != EOF);
 	free_buffer();
 }
 

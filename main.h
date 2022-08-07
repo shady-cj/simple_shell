@@ -88,4 +88,8 @@ void handle_SIGINT(int __attribute__((unused))sig);
 void handle_SIGTERM(int __attribute__((unused))sig);
 int is_dir_check(char *str);
 
+/**
+ * Getting user input
+ */
+ssize_t _getline(char **buffer, size_t *buf_size, FILE *stream);
 #endif

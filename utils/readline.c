@@ -5,7 +5,7 @@
 int main(void)
 {
 	char c;
-	char buffer[300];
+	char *buffer = malloc(sizeof(char) * 400);
 	ssize_t ret;
 	size_t i = 40, inp = 0;
 	printf("# ");
@@ -21,5 +21,5 @@ int main(void)
 		inp++;
 	} while(c != '\n');
 	buffer[inp] = '\0';
-	printf("%s %lu bytes\n", buffer, inp);
+	printf("%s %d %lu bytes\n", buffer, EOF, inp);
 }
