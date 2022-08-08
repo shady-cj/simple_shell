@@ -2,6 +2,7 @@
 
 char *buffer = NULL;
 char **argv = NULL;
+char *cmd_str = NULL;
 int exit_code = 0;
 void handle_z(int sig);
 
@@ -15,10 +16,9 @@ void handle_z(int sig);
 
 void shell(void)
 {
-	size_t buf_size = 40, i = 0;
+	size_t buf_size = 40;
 	ssize_t ret_input;
-	int v_cmd, child_p, isdir, interactive = isatty(STDIN_FILENO);
-	void (*func)(char **);
+	int interactive = isatty(STDIN_FILENO);
 
 	signal(SIGTSTP, &handle_z);
 	signal(SIGINT, &handle_SIGINT);
@@ -35,56 +35,12 @@ void shell(void)
 		}	
 		else
 		{
-			i = ret_input;
-			buffer = strip(buffer, i);
-			if (strlen(buffer) == 0)
-			{
-				re_initializer(&buf_size, &i, interactive);
-				continue;
-			}
-			argv = split(buffer);
-			func = map_cmd(argv[0]);
-			if (func != NULL)
-			{
-				func(argv);
-			}
-			else
-			{
-				v_cmd = get_cmd_from_path(argv[0]);
-				isdir = is_dir_check(argv[0]);
-				if (v_cmd == 0)
-				{
-					fprintf(stderr, "bash: %s: ", argv[0]);
-					if (isdir)
-						fprintf(stderr, "No such file or directory\n");
-					else
-						fprintf(stderr, "command not found\n");
-					re_initializer(&buf_size, &i, interactive);
-					free_args(argv);
-					continue;
-				}
-				child_p = fork();
-				if (child_p == 0)
-				{
-					if (execvpe(argv[0], argv, environ) == -1)
-					{
-						perror("./shell");
-						free_args(argv);
-						free_buffer();
-						exit(0);
-					}
-				}
-				else
-				{
-					wait(NULL);
-				}
-			}
-			re_initializer(&buf_size, &i, interactive);
-			free_args(argv);
-			continue;
+			exit_code = dispatch(buffer, &cmd_str, &argv, interactive);
+			re_initializer(&buffer, &buf_size, interactive, 40, 1);
+		
 		}
 	} while (ret_input != EOF);
-	free_buffer();
+	free_buffer(&buffer);
 }
 
 /**
@@ -92,18 +48,20 @@ void shell(void)
  * reinitializing my variables after a process ends or a shell
  * command executes
  * @buffer: The existing string
- * @buf_sizs: A pointer to the buf_size initialize back to 40
+ * @buf_size: A pointer to the buf_size initialize back to 40
  * @i: A pointer to the interator re_initialize to 0
  * @sh: To check if it's called in interactive mode or not
+ * @buf_init: Buffer size to initialize with
+ * @buf: buffer to free;
+ * @main: it a 1 or 0 field that gives the information whether the call
+ * is for the main buffer reset or not..
  * Return: void
  */
-void re_initializer(size_t *buf_size, size_t *i, int sh)
+void re_initializer(char **buf, size_t *buf_size, int sh, int buf_init, int main)
 {
-	free_buffer();
-	*buf_size = 40;
-	*i = 0;
-	buffer = alloc_str(*buf_size);
-	if (sh)
+	free_buffer(buf);
+	*buf_size = buf_init;
+	if (sh && main)
 		printf("$ ");
 }
 
@@ -120,18 +78,12 @@ void handle_SIGINT(int __attribute__((unused))sig)
 
 void handle_SIGTERM(int __attribute__((unused))sig)
 {
-	free_buffer();
-	exit_code = argv[1] ? atoi(argv[1]) : 0;
+	free_buffer(&cmd_str);
+	free_buffer(&buffer);
 	free_args(argv);
+	exit_code = argv[1] ? atoi(argv[1]) : 0;
 	exit(exit_code);
 }
-
-void free_buffer(void)
-{
-	free(buffer);
-	buffer = NULL;
-}
-
 
 int is_dir_check(char *str)
 {

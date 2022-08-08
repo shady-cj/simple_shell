@@ -95,3 +95,12 @@ void free_args(char **argv)
 	free(argv);
 	argv = NULL;
 }
+
+
+void free_buffer(char **buffer)
+{
+	free(*buffer);
+	*buffer = NULL;
+}
+
+

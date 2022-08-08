@@ -71,19 +71,19 @@ char *alloc_str(size_t size);
 char *realloc_str(char *buffer, size_t size);
 char *alloc_str_arr(size_t size, char **arr, size_t idx, int type);
 void free_args(char **argv);
+void free_buffer(char **buffer);
 
 
 /**
- * Resetting
+ * Resetting buffers
  */
-void re_initializer(size_t *buf_size, size_t *i, int interactive);
+void re_initializer(char **buf, size_t *buf_size, int sh, int buf_init, int main);
 
 /**
  * Main Shell Function
  */
 
 void shell(void);
-void free_buffer(void);
 void handle_SIGINT(int __attribute__((unused))sig);
 void handle_SIGTERM(int __attribute__((unused))sig);
 int is_dir_check(char *str);
@@ -92,4 +92,12 @@ int is_dir_check(char *str);
  * Getting user input
  */
 ssize_t _getline(char **buffer, size_t *buf_size, FILE *stream);
+
+
+/**
+ * Command executors and dispatchers
+ */
+int execute(char *buffer, size_t i, char ***argv);
+int dispatch(char *buffer, char **cmd, char ***argv, int interactive);
+
 #endif
