@@ -10,6 +10,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <errno.h>
 /**
  * struct cmd_opt - Defines a set of other commands that cannot be taken care
  * of by the exec functions
@@ -19,19 +20,19 @@
 typedef struct cmd_opt 
 {
 	char *cmd_type;
-	void (*func)(char **argv);
+	int (*func)(char **argv);
 } cmd;
 
 /**
  * Commands Helper functions
  */
-void handle_cd(char **argv);
-void handle_exit(char **argv);
-void handle_setenv(char **argv);
-void handle_unsetenv(char **argv);
+int handle_cd(char **argv);
+int handle_exit(char **argv);
+int handle_setenv(char **argv);
+int handle_unsetenv(char **argv);
 
 
-void (*map_cmd(char *str))(char **argv);
+int (*map_cmd(char *str))(char **argv);
 /**
  * Strings Helper Functions
  */
@@ -98,6 +99,9 @@ ssize_t _getline(char **buffer, size_t *buf_size, FILE *stream);
  * Command executors and dispatchers
  */
 int execute(char *buffer, size_t i, char ***argv);
+int execute_helper(char **argv);
 int dispatch(char *buffer, char **cmd, char ***argv, int interactive);
+void re_init_arr(char **arr);
+int parse_cmd(char **argv);
 
 #endif

@@ -4,7 +4,7 @@
  * @argv: The arrays of commands to implement
  * Return: Pointer to the funtion to be implemented
  */
-void (*map_cmd(char *str))(char **argv)
+int (*map_cmd(char *str))(char **argv)
 {
 	size_t i = 0;
 

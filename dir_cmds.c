@@ -8,7 +8,7 @@
  * @argv: Array of commands
  * Return: 0 of successful -1 if not
  */
-void handle_cd(char **argv)
+int handle_cd(char **argv)
 {
 	int ret;
 	char cwd[1024];
@@ -27,15 +27,21 @@ void handle_cd(char **argv)
 		ret = chdir(argv[1]);
 	if (ret != 0)
 	{
-		printf("bash: %s: %s:", argv[0], argv[1]);
+		printf("bash: %s: %s: ", argv[0], argv[1]);
 		printf("No such file or directory\n");
+		return (1);
 	}
 	else
 	{
 		setenv("OLDPWD", oldcwd, 1);
 		if (getcwd(cwd, sizeof(cwd)) == NULL)
+		{
 			perror("error");
+			return (1);
+		}
 		else
 			setenv("PWD", cwd, 1);
 	}
+	printf("error %d\n", errno);
+	return (0);
 }

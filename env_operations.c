@@ -12,14 +12,16 @@
  * Return: void
  */
 
-void handle_setenv(char **argv)
+int handle_setenv(char **argv)
 {
 	if (argv[1] == NULL || argv[2] == NULL)
 		fprintf(stderr, "Err:");
 	if (setenv(argv[1], argv[2], 1) != 0)
 	{
 		perror("Error");
+		return (1);
 	}
+	return (0);
 }
 
 /**
@@ -28,12 +30,14 @@ void handle_setenv(char **argv)
  * Return: void
  */
 
-void handle_unsetenv(char **argv)
+int handle_unsetenv(char **argv)
 {
 	if (argv[1] == NULL)
 		fprintf(stderr, "Err: ");
 	if (unsetenv(argv[1]) != 0)
 	{
 		perror("Error");
+		return (1);
 	}
+	return (0);
 }

@@ -10,7 +10,8 @@
  * Return: void
  */
 
-void handle_exit(char __attribute__((unused))**argv)
+int handle_exit(char __attribute__((unused))**argv)
 {
 	kill(getpid(), SIGTERM);
+	return (0);
 }
