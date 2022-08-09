@@ -11,9 +11,10 @@ int execute(char *buffer, size_t i, char ***argv)
 	buffer = strip(buffer, i);
 	if (strlen(buffer) == 0)
 	{
-		return (2);
+		return (-2);
 	}
 	*argv = split(buffer);
+	*argv = variable_substitution(*argv);
 	ret = parse_cmd(*argv);
 	return (ret);
 }
@@ -21,10 +22,11 @@ int execute(char *buffer, size_t i, char ***argv)
 
 int execute_helper(char **argv)
 {	
-	int v_cmd, child_p, isdir;
+	int v_cmd, child_p, isdir, status = 0;
 	int (*func)(char **);
-	int status = 0;
 
+	if (argv[0] == NULL)
+		return (1);
 	func = map_cmd(argv[0]);
 	if (func != NULL)
 	{
@@ -41,21 +43,19 @@ int execute_helper(char **argv)
 				fprintf(stderr, "No such file or directory\n");
 			else
 				fprintf(stderr, "command not found\n");
-			return (1);
+			return (127);
 		}
 		child_p = fork();
 		if (child_p == 0)
 		{
 			if (execvpe(argv[0], argv, environ) == -1)
-			{
 				perror("./shell");
-				return (1);
-			}
 		}
-		else
-		{
-			wait(&status);
-		}
+		wait(&status);
 	}
+	if (WIFEXITED(status))
+		status =  WEXITSTATUS(status);
+	else
+		status = 1;
 	return (status);
 }

@@ -93,3 +93,73 @@ char **split(char *buffer)
 	argv[++i] = NULL;
 	return (argv);
 }
+
+/**
+ *
+ * _itoa - Converts integers to strings
+ * @num: The integer to convert
+ * @str: The string to write into
+ * Return: void
+ */
+void _itoa(int num, char *str)
+{
+	num2str converter[] = {
+		{0, '0'},
+		{1, '1'},
+		{2, '2'},
+		{3, '3'},
+		{4, '4'},
+		{5, '5'},
+		{6, '6'},
+		{7, '7'},
+		{8, '8'},
+		{9, '9'},
+		{-1, '\0'},
+	};
+	int i = num, n, k = 0, h = 0;
+
+	if (i == 0)
+	{
+		str[0] = '0';
+		h++;
+	}
+	while (i)
+	{
+		n = i % 10;
+		while (converter[k].c)
+		{
+			if (n == converter[k].num)
+			{
+				str[h] = converter[k].c;
+				h++;
+				break;
+			}
+			k++;
+		}
+		i /= 10;
+		k = 0;
+	}
+	str[h] = '\0';
+	_strrev(str, h);
+}
+
+/**
+ * _strrev - Reverses the string
+ * @str: The string to reverse
+ * @n: The length of the str:
+ * Return: void
+ */
+void _strrev(char *str, int n)
+{
+	int i = 0, l = n - 1;
+	char c;
+
+	while (i < l)
+	{
+		c = str[i];
+		str[i] = str[l];
+		str[l] = c;
+		i++;
+		l--;
+	}
+}

@@ -28,8 +28,9 @@ int dispatch(char *buffer, char **cmd_str, char ***argv, int interactive)
 			*cmd_str = cmd;
 			ex = execute(*cmd_str, j, argv);
 			re_initializer(&cmd, &buf_size, interactive, 20, 0);
-			if (ex != 2)
+			if (ex != -2)
 				free_args(*argv);
+			ex = ex == -2 ? 0 : ex;
 			cmd = alloc_str(buf_size);
 			j = 0;
 			i++;
@@ -48,8 +49,9 @@ int dispatch(char *buffer, char **cmd_str, char ***argv, int interactive)
 	*cmd_str = cmd;
 	ex = execute(*cmd_str, j, argv);
 	free_buffer(cmd_str);
-	if (ex != 2)
+	if (ex != -2)
 		free_args(*argv);
+	ex = ex == -2 ? 0 : ex;
 	return (ex);
 }
 /**
@@ -107,6 +109,8 @@ int parse_cmd(char **argv)
 		j++;
 	}
 	arr[j] = NULL;
+	if (arr[0] == NULL)
+		return (0);
 	if ((type == 1 && ret > 0) || (type == 2 && ret == 0))
 		return (ret);
 
