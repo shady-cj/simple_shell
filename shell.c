@@ -35,9 +35,12 @@ void shell(void)
 		}	
 		else
 		{
-			exit_code = dispatch(buffer, &cmd_str, &argv, interactive);
+			buffer = strip(buffer, ret_input);
+			if (strlen(buffer) != 0)
+				exit_code = dispatch(buffer, &cmd_str, &argv, interactive);
+			else
+				exit_code = 0;
 			re_initializer(&buffer, &buf_size, interactive, 40, 1);
-		
 		}
 	} while (ret_input != EOF);
 	free_buffer(&buffer);

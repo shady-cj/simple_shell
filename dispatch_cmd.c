@@ -114,7 +114,7 @@ int parse_cmd(char **argv)
 		|| strcmp(strip(arr[0], strlen(arr[0])), "||\0") == 0)
 	{
 		arr[0] = strip(arr[0], strlen(arr[0]));
-		fprintf(stderr, "bash: syntax error ");
+		fprintf(stderr, "./shell: syntax error ");
 		fprintf(stderr, "near unexpected token `%s'\n", arr[0]);
 		re_init_arr(&arr[0]);	
 		return (1);
