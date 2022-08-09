@@ -25,15 +25,20 @@ char **variable_substitution(char **argv)
 		if (*s == '$')
 		{
 			s++;
-			var = get_env(s);
 			free(argv[i]);
-			if (*s == '$')
+			if (strcmp(s, "$\0") == 0)
 			{
 				_itoa(getpid(), str);
 				argv[i] = strdup(str);
 			}
+			else if (strcmp(s, "?\0") == 0)
+			{
+				_itoa(get_exit_code(), str);
+				argv[i] = strdup(str);
+			}
 			else
 			{
+				var = get_env(s);
 				argv[i] = var ? var : strdup(" \0");
 			}
 		}

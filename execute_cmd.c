@@ -11,7 +11,7 @@ int execute(char *buffer, size_t i, char ***argv)
 	buffer = strip(buffer, i);
 	if (strlen(buffer) == 0)
 	{
-		return (2);
+		return (-2);
 	}
 	*argv = split(buffer);
 	*argv = variable_substitution(*argv);
@@ -43,21 +43,19 @@ int execute_helper(char **argv)
 				fprintf(stderr, "No such file or directory\n");
 			else
 				fprintf(stderr, "command not found\n");
-			return (1);
+			return (127);
 		}
 		child_p = fork();
 		if (child_p == 0)
 		{
 			if (execvpe(argv[0], argv, environ) == -1)
-			{
 				perror("./shell");
-				return (1);
-			}
 		}
-		else
-		{
-			wait(&status);
-		}
+		wait(&status);
 	}
+	if (WIFEXITED(status))
+		status =  WEXITSTATUS(status);
+	else
+		status = 1;
 	return (status);
 }

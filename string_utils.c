@@ -118,6 +118,11 @@ void _itoa(int num, char *str)
 	};
 	int i = num, n, k = 0, h = 0;
 
+	if (i == 0)
+	{
+		str[0] = '0';
+		h++;
+	}
 	while (i)
 	{
 		n = i % 10;

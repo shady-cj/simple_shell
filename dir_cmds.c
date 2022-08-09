@@ -40,7 +40,27 @@ int handle_cd(char **argv)
 			return (1);
 		}
 		else
+		{
 			setenv("PWD", cwd, 1);
+		}
+	}
+	return (0);
+}
+
+/**
+ * is_dir_check - This checks if the command contains a directory
+ * @str: The string to check through
+ * Return: 1 if found and 0 if none
+ */
+int is_dir_check(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		if (str[i] == '/')
+			return (1);
+		i++;
 	}
 	return (0);
 }

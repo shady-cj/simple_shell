@@ -42,6 +42,12 @@ char **split(char *buffer);
 /**
  * convert int to str
  */
+/**
+ * struct num_to_str - Helps to create a structure that maps numbers to
+ * their corresponding equivalent in character.
+ * @num: The number
+ * @c: Equivalent of @num in string
+ */
 typedef struct num_to_str
 {
 	int num;
@@ -93,9 +99,15 @@ void re_initializer(char **buf, size_t *buf_size, int sh, int buf_init, int main
  * Main Shell Function
  */
 
-void shell(void);
+int shell(void);
 void handle_SIGINT(int __attribute__((unused))sig);
 void handle_SIGTERM(int __attribute__((unused))sig);
+int get_exit_code(void);
+
+
+
+
+
 int is_dir_check(char *str);
 
 /**
