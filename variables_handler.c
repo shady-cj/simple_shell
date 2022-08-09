@@ -9,7 +9,7 @@
 char **variable_substitution(char **argv)
 {
 	int comment = 0, i = 0;
-	char *s, *var;
+	char *s, *var, *pl;
 	char str[20];
 
 	while (argv[i])
@@ -24,14 +24,14 @@ char **variable_substitution(char **argv)
 		s = argv[i];
 		if (*s == '$')
 		{
+			pl = argv[i];
 			s++;
-			free(argv[i]);
-			if (strcmp(s, "$\0") == 0)
+			if (*s == '$')
 			{
 				_itoa(getpid(), str);
 				argv[i] = strdup(str);
 			}
-			else if (strcmp(s, "?\0") == 0)
+			else if (*s == '?')
 			{
 				_itoa(get_exit_code(), str);
 				argv[i] = strdup(str);
@@ -41,6 +41,7 @@ char **variable_substitution(char **argv)
 				var = get_env(s);
 				argv[i] = var ? var : strdup(" \0");
 			}
+			free(pl);
 		}
 		else if (*s == '#')
 		{
