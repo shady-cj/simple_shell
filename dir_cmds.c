@@ -42,6 +42,5 @@ int handle_cd(char **argv)
 		else
 			setenv("PWD", cwd, 1);
 	}
-	printf("error %d\n", errno);
 	return (0);
 }

@@ -14,7 +14,6 @@ int execute(char *buffer, size_t i, char ***argv)
 		return (2);
 	}
 	*argv = split(buffer);
-
 	ret = parse_cmd(*argv);
 	return (ret);
 }
@@ -24,7 +23,7 @@ int execute_helper(char **argv)
 {	
 	int v_cmd, child_p, isdir;
 	int (*func)(char **);
-	int exc;
+	int status = 0;
 
 	func = map_cmd(argv[0]);
 	if (func != NULL)
@@ -47,8 +46,7 @@ int execute_helper(char **argv)
 		child_p = fork();
 		if (child_p == 0)
 		{
-			exc = execvpe(argv[0], argv, environ);
-			if (exc == -1)
+			if (execvpe(argv[0], argv, environ) == -1)
 			{
 				perror("./shell");
 				return (1);
@@ -56,8 +54,8 @@ int execute_helper(char **argv)
 		}
 		else
 		{
-			wait(NULL);
+			wait(&status);
 		}
 	}
-	return (0);
+	return (status);
 }
