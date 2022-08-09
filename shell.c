@@ -24,13 +24,13 @@ void shell(void)
 	signal(SIGINT, &handle_SIGINT);
 	signal(SIGTERM, &handle_SIGTERM);
 	if (interactive)
-		printf("$ ");
+		write(STDOUT_FILENO, "$ ", 2);
 	do {
 		ret_input = _getline(&buffer, &buf_size, stdout);
 		if (ret_input == EOF)
 		{
 			if (interactive)
-				printf("\n");
+				write(STDOUT_FILENO, "\n", 1);
 			continue;
 		}	
 		else
@@ -65,7 +65,7 @@ void re_initializer(char **buf, size_t *buf_size, int sh, int buf_init, int main
 	free_buffer(buf);
 	*buf_size = buf_init;
 	if (sh && main)
-		printf("$ ");
+		write(STDOUT_FILENO, "$ ", 2);
 }
 
 void handle_z(int __attribute__((unused))sig)
