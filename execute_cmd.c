@@ -14,6 +14,7 @@ int execute(char *buffer, size_t i, char ***argv)
 		return (2);
 	}
 	*argv = split(buffer);
+	*argv = variable_substitution(*argv);
 	ret = parse_cmd(*argv);
 	return (ret);
 }
@@ -21,10 +22,11 @@ int execute(char *buffer, size_t i, char ***argv)
 
 int execute_helper(char **argv)
 {	
-	int v_cmd, child_p, isdir;
+	int v_cmd, child_p, isdir, status = 0;
 	int (*func)(char **);
-	int status = 0;
 
+	if (argv[0] == NULL)
+		return (1);
 	func = map_cmd(argv[0]);
 	if (func != NULL)
 	{

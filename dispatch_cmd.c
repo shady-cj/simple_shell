@@ -107,6 +107,8 @@ int parse_cmd(char **argv)
 		j++;
 	}
 	arr[j] = NULL;
+	if (arr[0] == NULL)
+		return (0);
 	if ((type == 1 && ret > 0) || (type == 2 && ret == 0))
 		return (ret);
 

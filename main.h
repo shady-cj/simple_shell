@@ -39,7 +39,16 @@ int (*map_cmd(char *str))(char **argv);
 char *strip(char *buffer, size_t size);
 char **split(char *buffer);
 
-
+/**
+ * convert int to str
+ */
+typedef struct num_to_str
+{
+	int num;
+	char c;
+} num2str;
+void _strrev(char *str, int n);
+void _itoa(int num, char *str);
 /**
  *
  * Environment Variables and Checking Paths and creating
@@ -104,4 +113,8 @@ int dispatch(char *buffer, char **cmd, char ***argv, int interactive);
 void re_init_arr(char **arr);
 int parse_cmd(char **argv);
 
+/*
+ * variable handlers
+ */
+char **variable_substitution(char **argv);
 #endif
