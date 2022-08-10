@@ -78,8 +78,7 @@ void handle_EXIT(int exit_no)
 	free_buffer(&cmd_str);
 	free_buffer(&buffer);
 	free_args(argv);
-	exit_code = exit_no;
-	exit(exit_code);
+	exit(exit_no == 0 ? exit_code : exit_no);
 }
 
 /**
