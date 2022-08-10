@@ -99,13 +99,10 @@ void re_initializer(char **buf, size_t *buf_size, int sh, int buf_init, int main
  * Main Shell Function
  */
 
-int shell(void);
+int shell(int, char *);
 void handle_SIGINT(int __attribute__((unused))sig);
 void handle_EXIT(int exit_no);
 int get_exit_code(void);
-
-
-
 
 
 int is_dir_check(char *str);
@@ -113,7 +110,7 @@ int is_dir_check(char *str);
 /**
  * Getting user input
  */
-ssize_t _getline(char **buffer, size_t *buf_size, FILE *stream);
+ssize_t _getline(char **buffer, size_t *buf_size, int STD);
 
 
 /**

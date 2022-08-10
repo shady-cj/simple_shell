@@ -13,18 +13,19 @@
  * @stream: The file stream in this case standard output
  * Return: The amount of bytes written
  */
-ssize_t _getline(char **buffer, size_t *buf_size, FILE *stream)
+ssize_t _getline(char **buffer, size_t *buf_size, int STD)
 {
 	static ssize_t input;
 	char c;
 	char *str;
 	int ret;
 
-	fflush(stream);
+	if (STD < 2)
+		fflush(stdout);
 	str = alloc_str(*buf_size);
 	input = 0;
 	do {
-		ret = read(STDIN_FILENO, &c, 1);
+		ret = read(STD, &c, 1);
 		if (ret == -1 || (input == 0 && ret == 0))
 		{
 			free(str);

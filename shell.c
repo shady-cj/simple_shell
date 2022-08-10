@@ -14,18 +14,29 @@ void handle_z(int sig);
  * traditional shell would
  */
 
-int shell(void)
+int shell(int c, char *filename)
 {
 	size_t buf_size = 40;
 	ssize_t ret_input;
-	int interactive = isatty(STDIN_FILENO);
+	int interactive = isatty(STDIN_FILENO), STD;
 
+	STD = STDIN_FILENO;
 	signal(SIGTSTP, &handle_z);
 	signal(SIGINT, &handle_SIGINT);
+	if (c > 1)
+	{
+		interactive = 0;
+		STD = open(filename, O_RDONLY);
+		if (STD == -1)
+		{
+			perror("./shell");
+			return (errno);
+		}
+	}
 	if (interactive)
 		write(STDOUT_FILENO, "$ ", 2);
 	do {
-		ret_input = _getline(&buffer, &buf_size, stdout);
+		ret_input = _getline(&buffer, &buf_size, STD);
 		if (ret_input == EOF)
 		{
 			if (interactive)
@@ -43,6 +54,8 @@ int shell(void)
 		}
 	} while (ret_input != EOF);
 	free_buffer(&buffer);
+	if (STD > 2)
+		close(STD);
 	return (exit_code);
 }
 
