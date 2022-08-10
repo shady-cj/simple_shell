@@ -101,7 +101,7 @@ void re_initializer(char **buf, size_t *buf_size, int sh, int buf_init, int main
 
 int shell(void);
 void handle_SIGINT(int __attribute__((unused))sig);
-void handle_SIGTERM(int __attribute__((unused))sig);
+void handle_EXIT(int exit_no);
 int get_exit_code(void);
 
 

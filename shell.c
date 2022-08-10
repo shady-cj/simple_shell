@@ -22,7 +22,6 @@ int shell(void)
 
 	signal(SIGTSTP, &handle_z);
 	signal(SIGINT, &handle_SIGINT);
-	signal(SIGTERM, &handle_SIGTERM);
 	if (interactive)
 		write(STDOUT_FILENO, "$ ", 2);
 	do {
@@ -70,16 +69,16 @@ void handle_SIGINT(int __attribute__((unused))sig)
 	fflush(stdout);
 }
 /**
- * handle_SIGTERM - Handles the termination signal when exit is called
- * @sig: The signal id
+ * handle_EXIT - Handles the termination signal when exit is called
+ * @exit_no: The exit number
  * Return: void
  */
-void handle_SIGTERM(int __attribute__((unused))sig)
+void handle_EXIT(int exit_no)
 {
 	free_buffer(&cmd_str);
 	free_buffer(&buffer);
 	free_args(argv);
-	exit_code = argv[1] ? atoi(argv[1]) : 0;
+	exit_code = exit_no;
 	exit(exit_code);
 }
 

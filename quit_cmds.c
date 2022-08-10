@@ -12,6 +12,6 @@
 
 int handle_exit(char __attribute__((unused))**argv)
 {
-	kill(getpid(), SIGTERM);
+	handle_EXIT(argv[1] ? atoi(argv[1]) : 0);
 	return (0);
 }
