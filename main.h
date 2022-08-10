@@ -129,4 +129,5 @@ int parse_cmd(char **argv);
  * variable handlers
  */
 char **variable_substitution(char **argv);
+void check_for_variable(char *cmd_str, char *str);
 #endif

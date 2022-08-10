@@ -9,8 +9,8 @@
 char **variable_substitution(char **argv)
 {
 	int comment = 0, i = 0;
-	char *s, *var, *pl;
-	char str[20];
+	char *s;
+	char str[3000];
 
 	while (argv[i])
 	{
@@ -22,33 +22,79 @@ char **variable_substitution(char **argv)
 			continue;
 		}
 		s = argv[i];
-		if (*s == '$')
-		{
-			pl = argv[i];
-			s++;
-			if (*s == '$')
-			{
-				_itoa(getpid(), str);
-				argv[i] = strdup(str);
-			}
-			else if (*s == '?')
-			{
-				_itoa(get_exit_code(), str);
-				argv[i] = strdup(str);
-			}
-			else
-			{
-				var = get_env(s);
-				argv[i] = var ? var : strdup(" \0");
-			}
-			free(pl);
-		}
-		else if (*s == '#')
+		if (*s == '#')
 		{
 			comment = 1;
 			continue;
 		}
+		check_for_variable(s, str);
+		argv[i] = strdup(str);
+		free(s);
+		s = NULL;
 		i++;
 	}
 	return (argv);
+}
+
+void check_for_variable(char *cmd_str, char *str)
+{
+	char *var, *pl, *cmd;
+	char sub[2000];
+	int i = 0, j;
+
+	cmd = cmd_str;
+	while (*cmd)
+	{
+		if (*cmd == '$')
+		{
+			cmd++;
+			if (*cmd == '$' || *cmd == '?')
+			{
+				if (*cmd == '$')
+					_itoa(getpid(), sub);
+				else
+					_itoa(get_exit_code(), sub);
+				pl = sub;
+				while (*pl)
+				{
+					str[i] = *pl;
+					pl++;
+					i++;
+				}
+				cmd++;
+				continue;
+			}
+			else if(*cmd != '\0')
+			{
+				j = 0;
+				while (*cmd != '$' && *cmd != '\0')
+				{
+					sub[j] = *cmd;
+					j++;
+					cmd++;
+				}
+				sub[j] = '\0';
+				var = get_env(sub);
+				
+				if (var != NULL)
+				{
+					pl = var;
+					while (*pl)
+					{
+						str[i] = *pl;
+						pl++;
+						i++;
+					}
+					free(var);
+				}
+				continue;
+			}
+			else
+				cmd--;
+		}
+		str[i] = *cmd;
+		cmd++;
+		i++;
+	}
+	str[i] = '\0';
 }
