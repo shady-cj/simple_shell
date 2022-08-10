@@ -48,6 +48,7 @@ int shell(int c, char *filename)
 		else
 		{
 			buffer = strip(buffer, ret_input);
+			buffer = sub_alias(buffer);
 			if (strlen(buffer) != 0)
 				exit_code = dispatch(buffer, &cmd_str, &argv, interactive);
 			else

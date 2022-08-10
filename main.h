@@ -138,4 +138,6 @@ int search_alias(char *name);
 int handle_alias(char **argv);
 int add_alias_to_list(char *name, char *value);
 void free_aliases(void);
+char *sub_alias(char *buffer);
+char *get_alias(char *str);
 #endif

@@ -62,7 +62,7 @@ void free_aliases(void)
 		return;
 	ptr = alias_list_head;
 
-	if (ptr)
+	while (ptr)
 	{
 		pl = ptr->link;
 		free(ptr->name);
@@ -71,4 +71,74 @@ void free_aliases(void)
 		ptr = pl;
 	}
 	alias_list_head = NULL;
+}
+/**
+ * get_alias - Gets the value of an alias
+ * @str: The alias name
+ * Return: The value of the alias
+ */
+char *get_alias(char *str)
+{
+	alias *ptr;
+
+	if (alias_list_head == NULL)
+		return (NULL);
+	ptr = alias_list_head;
+
+	while (ptr)
+	{
+		if (strcmp(ptr->name, str) == 0)
+			return (ptr->value);
+
+		ptr = ptr->link;
+	}
+	return (NULL);
+}
+/**
+ * sub_alias -Substitute aliases in commands
+ * @buffer: The string of commands
+ * Return: The new string.
+ */
+char *sub_alias(char *buffer)
+{
+	int j = 0, i = 0;
+	size_t size = 80, k = 0;
+	char str[40];
+	char *new = alloc_str(size), *ptr;
+
+	if (strlen(buffer) == 0)
+		return (buffer);
+	while (buffer[i] != ' ' && buffer[i] != '\0')
+	{
+		str[j] = buffer[i];
+		j++;
+		i++;
+	}
+	str[j] = '\0';
+	ptr = get_alias(str);
+	if (ptr == NULL)
+	{
+		free(new);
+		return (buffer);
+	}
+	while (*ptr)
+	{
+		new[k] = *ptr;
+		ptr++;
+		k++;
+	}
+	while (buffer[i])
+	{
+		if (k == size)
+		{
+			size += 40;
+			new = realloc_str(new, size);
+		}
+		new[k] = buffer[i];
+		i++;
+		k++;
+	}
+	new[k] = '\0';
+	free(buffer);
+	return (new);
 }

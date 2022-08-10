@@ -81,11 +81,13 @@ char *get_alias_name(char *str, int *sf)
 		found = search_alias(buf);
 		if (found)
 		{
+			free(buf);
 			*sf = 1;
 			return (NULL);
 		}
 		fprintf(stderr, "./shell: alias: ");
 		fprintf(stderr, "%s: not found\n", buf);
+		free(buf);
 		return (NULL);
 	}
 	return (buf);
@@ -124,6 +126,7 @@ char *get_alias_value(char *str)
 		buf[i] = '\0';
 		return (buf);
 	}
+	free(buf);
 	return (NULL);
 
 }
@@ -161,6 +164,12 @@ int add_alias_to_list(char *name, char *value)
 		}
 		ptr = ptr->link;
 	}
+	if (strcmp(ptr->name, name) == 0)
+	{
+		free(ptr->value);
+		ptr->value = value;
+		return (0);
+	}
 	new = malloc(sizeof(alias));
 	if (new == NULL)
 		return (1);
@@ -169,6 +178,5 @@ int add_alias_to_list(char *name, char *value)
 	new->link = NULL;
 	ptr->link = new;
 	new = NULL;
-
 	return(0);
 }
