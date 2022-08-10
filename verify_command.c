@@ -3,16 +3,18 @@
  * get_cmd_from_path - Gets the command and check if it is in the present path.
  * @cmd: The command typed.
  * Return: int
- * Description: This function gets a command as an argument e.g ls, cat etc and checks
- * if the command is present in the paths directories... e.g /bin/ls /usr/local/bin/ls.
+ * Description: This function gets a command as an argument e.g
+ * ls, cat etc and checks
+ * if the command is present in the paths directories... e.g
+ * /bin/ls /usr/local/bin/ls.
  */
 int get_cmd_from_path(char *cmd)
 {
 	char *s;
 	char **dirs;
 	int i = 0;
-
 	path_dir *head = NULL;
+
 	s = get_env("PATH");
 	dirs = split_path(s);
 	while (dirs[i])
@@ -45,7 +47,7 @@ char **split_path(char *s)
 			if (j == buf_size_j)
 			{
 				buf_size_j += 40;
-				argv[i] =  alloc_str_arr(buf_size_j, argv, i, 1);	
+				argv[i] =  alloc_str_arr(buf_size_j, argv, i, 1);
 			}
 			argv[i][j] = *s_ptr;
 			j++;
@@ -55,7 +57,7 @@ char **split_path(char *s)
 			argv[i][j] = '\0';
 			i++;
 			buf_size_j = 40;
-			argv[i] = alloc_str_arr(buf_size_j, argv, i, 0); 
+			argv[i] = alloc_str_arr(buf_size_j, argv, i, 0);
 			j = 0;
 		}
 		s_ptr++;
@@ -78,6 +80,7 @@ path_dir *add_path(path_dir **head, char *str)
 {
 	path_dir *ptr = NULL;
 	path_dir *new = NULL;
+
 	ptr = *head;
 	if (*head == NULL)
 	{

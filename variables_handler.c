@@ -1,7 +1,8 @@
 
 #include "main.h"
 /**
- * variable_substitution - The functions takes in arrays of commands and check for
+ * variable_substitution - The functions takes in arrays of commands and
+ * check for
  * where variables are invoked or commnents are made and then substitute them
  * @argv: The array of commands
  * Return: The updated list of commands
@@ -35,7 +36,13 @@ char **variable_substitution(char **argv)
 	}
 	return (argv);
 }
-
+/**
+ * check_for_variable - Checks for the variable and their types
+ * @cmd_str: The command string
+ * @str: The buffer to rewrite the new substituted command
+ * into
+ * Return: void
+ */
 void check_for_variable(char *cmd_str, char *str)
 {
 	char *var, *pl, *cmd;
@@ -64,7 +71,7 @@ void check_for_variable(char *cmd_str, char *str)
 				cmd++;
 				continue;
 			}
-			else if(*cmd != '\0')
+			else if (*cmd != '\0')
 			{
 				j = 0;
 				while (*cmd != '$' && *cmd != '\0')
@@ -75,7 +82,6 @@ void check_for_variable(char *cmd_str, char *str)
 				}
 				sub[j] = '\0';
 				var = get_env(sub);
-				
 				if (var != NULL)
 				{
 					pl = var;

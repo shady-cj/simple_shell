@@ -1,11 +1,5 @@
 #include "main.h"
 /**
- *
- * This files contain the function to help set environment variables
- *
- */
-
-/**
  * handle_setenv - An helper function that handles setting of environment
  * variables
  * @argv: The array of commands

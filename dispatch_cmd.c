@@ -20,7 +20,7 @@ int dispatch(char *buffer, char **cmd_str, char ***argv, int interactive)
 	if (buffer == NULL)
 		return (1);
 	cmd = alloc_str(buf_size);
-	while(buffer[i])
+	while (buffer[i])
 	{
 		if (buffer[i] == ';')
 		{
@@ -55,16 +55,16 @@ int dispatch(char *buffer, char **cmd_str, char ***argv, int interactive)
 	return (ex);
 }
 /**
- * parse_cmd - This helper functions parses the commands to check for logical OR
- * and logical AND in the command statement
+ * parse_cmd - This helper functions parses the commands to check for
+ * logical OR and logical AND in the command statement
  * @argv: The arrays of commands to execute
- * Description: The ret variable is used to keep track of the previous return value
- * type variable is used to keep track of the previously encountered type
+ * Description: The ret variable is used to keep track of the previous return
+ * value type variable is used to keep track of the previously encountered type
  * where 1 - Logical AND
  * 2 - Logical OR
  * 0 - None was encountered
- * lor variable to keep track of the logical OR In or order to know whether to proceed
- * with logical AND or not and same for Logical OR.
+ * lor variable to keep track of the logical OR In or order to know whether to
+ * proceed with logical AND or not and same for Logical OR.
  * Return: The exit status
  */
 int parse_cmd(char **argv)
@@ -120,17 +120,21 @@ int parse_cmd(char **argv)
 		arr[0] = strip(arr[0], strlen(arr[0]));
 		fprintf(stderr, "./shell: syntax error ");
 		fprintf(stderr, "near unexpected token `%s'\n", arr[0]);
-		re_init_arr(&arr[0]);	
+		re_init_arr(&arr[0]);
 		return (1);
 	}
 	ret = execute_helper(arr);
 	re_init_arr(&arr[0]);
 	return (ret);
 }
-
+/**
+ * re_init_arr - This function helps to re initialize an array with NULL
+ * @opt: The array to re initialize
+ * Return: void
+ */
 void re_init_arr(char **opt)
-{	
-	while(*opt)
+{
+	while (*opt)
 	{
 		*opt = NULL;
 		opt++;

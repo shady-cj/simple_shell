@@ -7,11 +7,13 @@ int exit_code = 0;
 void handle_z(int sig);
 
 /**
- * shell - This is the main function that implements the shell takes in
- * no arguments
+ * shell - This is the main function that implements the shell
+ * @c: The number of argument from the command line
+ * @filename: The filename if any was passed at the command line
  * Description: The shell function is the main function that connects other
  * functions it takes in the inputs and returns corresponding output as the
  * traditional shell would
+ * Return: Status code.
  */
 
 int shell(int c, char *filename)
@@ -42,7 +44,7 @@ int shell(int c, char *filename)
 			if (interactive)
 				write(STDOUT_FILENO, "\n", 1);
 			continue;
-		}	
+		}
 		else
 		{
 			buffer = strip(buffer, ret_input);

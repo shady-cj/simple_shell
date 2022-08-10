@@ -1,8 +1,5 @@
 #include "main.h"
 /**
- * This file contains helper function to modify strings
- */
-/**
  * strip - This helper function takes a string an removes all whitespace
  * padding from the beginning and from the end
  * @buffer: The string to strip
@@ -56,37 +53,36 @@ char **split(char *buffer)
 	argv = malloc(sizeof(char *) * buf_size_i);
 	if (argv == NULL)
 		exit(1);
-        argv[i] = alloc_str_arr(buf_size_j, argv, i, 0);
-        while (*s)
-        {
-                if (*s == d)
+	argv[i] = alloc_str_arr(buf_size_j, argv, i, 0);
+	while (*s)
+	{
+		if (*s == d)
 		{
-                        if (!found)
-                        {
+			if (!found)
+			{
 				argv[i][j] = '\0';
-                                i++;
-                                argv[i] = alloc_str_arr(buf_size_j, argv,
+				i++;
+				argv[i] = alloc_str_arr(buf_size_j, argv,
 						i, 0);
-                                j = 0;
-                                found = 1;
-                        }
-
-                }
-                else
-                {
-                        if (*s != '\n')
-                        {
+				j = 0;
+				found = 1;
+			}
+		}
+		else
+		{
+			if (*s != '\n')
+			{
 				if (j == buf_size_j)
 				{
 					buf_size_j += 20;
 					argv[i] = alloc_str_arr(buf_size_j,
 							argv, i, 1);
 				}
-                                argv[i][j] = *s;
-                                j++;
-                        }
-                        found = 0;
-                }
+				argv[i][j] = *s;
+				j++;
+			}
+			found = 0;
+		}
 		s++;
 	}
 	argv[i][j] = '\0';
@@ -95,7 +91,6 @@ char **split(char *buffer)
 }
 
 /**
- *
  * _itoa - Converts integers to strings
  * @num: The integer to convert
  * @str: The string to write into

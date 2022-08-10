@@ -27,7 +27,7 @@ char *get_env(char *s)
 			free_argv(argv);
 			return (str);
 		}
-		free_argv(argv);	
+		free_argv(argv);
 		i++;
 	}
 	return (NULL);
@@ -53,7 +53,7 @@ char **get_key_value(char *s)
 		if (i == key_size)
 		{
 			key_size += 40;
-			key = increase_key_size(key, argv, key_size);	
+			key = increase_key_size(key, argv, key_size);
 		}
 		key[i] = s[i];
 		i++;
@@ -103,8 +103,10 @@ char *increase_key_size(char *key, char **argv, size_t size)
 
 
 /**
- * increase_value_size - An helper function for the above get_key_value function to
- * reallocate the env variable value to the initial value when it runs out of space
+ * increase_value_size - An helper function for the above
+ * get_key_value function to
+ * reallocate the env variable value to the initial value
+ * when it runs out of space
  * @value: Pointer to the previously allocate value location
  * @argv: The argument vector containing the key value pair.
  * @size: The new size to reallocate
@@ -133,7 +135,6 @@ char *increase_value_size(char *value, char **argv, size_t size)
  */
 void free_argv(char **argv)
 {
-	
 	free(argv[0]);
 	free(argv[1]);
 	free(argv[2]);

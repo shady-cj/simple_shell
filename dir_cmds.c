@@ -1,9 +1,5 @@
 #include "main.h"
 /**
- * This file contain helper function that works on directory level
- * operation
- */
-/**
  * handle_cd - The function handles directory changing
  * @argv: Array of commands
  * Return: 0 of successful -1 if not

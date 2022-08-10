@@ -2,11 +2,16 @@
 /**
  * main - This is the entry point
  * for now it's main functionality is to initiate the shell
- * Return: void
+ * @argc: The number of arguments passed into the command
+ * no. 1 is always the name of the executable itself
+ * @argv: The argument vector i.e the list ox argument
+ * passed into this program
+ * Return: status code of the program
  */
 int main(int argc, char **argv)
 {
 	int fd;
+
 	if (argc > 1)
 	{
 		fd = access(argv[1], R_OK);

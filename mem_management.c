@@ -1,8 +1,4 @@
 #include "main.h"
-/**
- * This file contains function that helps in allocating
- * and reallocating memory..
- */
 
 /**
  * alloc_str - Helps to allocate memory to strings i.e arrays of
@@ -57,7 +53,7 @@ char *realloc_str(char *buffer, size_t size)
 char *alloc_str_arr(size_t size, char **arr, size_t idx, int type)
 {
 	char *new_str;
-	
+
 	if (type == 0)
 		new_str = malloc(sizeof(char) * size);
 	else
@@ -79,7 +75,7 @@ char *alloc_str_arr(size_t size, char **arr, size_t idx, int type)
 
 /**
  * free_args - Helps to free array of strings previously allocated
- * @args: The array of strings
+ * @argv: The array of strings
  * Return: void
  */
 void free_args(char **argv)
@@ -96,7 +92,11 @@ void free_args(char **argv)
 	argv = NULL;
 }
 
-
+/**
+ * free_buffer - Helps to free used buffer from memory
+ * @buffer: The address of the buffer to be freed
+ * Return: void
+ */
 void free_buffer(char **buffer)
 {
 	free(*buffer);

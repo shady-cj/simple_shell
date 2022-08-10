@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * map_cmd - Maps the command to their functions
- * @argv: The arrays of commands to implement
+ * @str: The command to map
  * Return: Pointer to the funtion to be implemented
  */
 int (*map_cmd(char *str))(char **argv)

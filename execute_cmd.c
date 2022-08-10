@@ -1,8 +1,17 @@
 #include "main.h"
-/**
- * This contain functions that helps in executing commands
- */
 
+
+/**
+ * execute - This function executes the commands with the aid of
+ * variable substition which substitute variables and parse_cmd
+ * that parses the command to check for commnents logical AND
+ * and logical OR
+ * @buffer: The main buffer containing the string of commands
+ * @i: The length of the buffer
+ * @argv: The arrays to split the commands into before passing
+ * to exec
+ * Return: The status code of the operation
+ */
 
 int execute(char *buffer, size_t i, char ***argv)
 {
@@ -19,9 +28,14 @@ int execute(char *buffer, size_t i, char ***argv)
 	return (ret);
 }
 
-
+/**
+ * execute_helper - Carries out the execution by first checking if the
+ * command exists then passing it to exec to execute
+ * @argv: The array of commands to execute
+ * Return: The exit code of the operation.
+ */
 int execute_helper(char **argv)
-{	
+{
 	int v_cmd, child_p, isdir, status = 0;
 	int (*func)(char **);
 

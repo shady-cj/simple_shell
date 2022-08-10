@@ -1,16 +1,11 @@
 #include "main.h"
 /**
- * This file implements the getline function in order to get the user
- * input from stream using the read sys call..
- *
- */
-
-/**
- * _getline - This gets the input from the standard input thus implementing
+ * _getline - This gets the input from the standard input or a file
+ * thus implementing
  * the getline function
  * @buffer: The buffer to write into
  * @buf_size: The size of the buffer
- * @stream: The file stream in this case standard output
+ * @STD: The file descriptor to read from.
  * Return: The amount of bytes written
  */
 ssize_t _getline(char **buffer, size_t *buf_size, int STD)
