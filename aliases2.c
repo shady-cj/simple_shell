@@ -65,6 +65,8 @@ void free_aliases(void)
 	if (ptr)
 	{
 		pl = ptr->link;
+		free(ptr->name);
+		free(ptr->value);
 		free(ptr);
 		ptr = pl;
 	}
