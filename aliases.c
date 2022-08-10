@@ -159,6 +159,7 @@ int add_alias_to_list(char *name, char *value)
 		if (strcmp(ptr->name, name) == 0)
 		{
 			free(ptr->value);
+			free(name);
 			ptr->value = value;
 			return (0);
 		}
@@ -167,6 +168,7 @@ int add_alias_to_list(char *name, char *value)
 	if (strcmp(ptr->name, name) == 0)
 	{
 		free(ptr->value);
+		free(name);
 		ptr->value = value;
 		return (0);
 	}
