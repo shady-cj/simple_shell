@@ -1,9 +1,9 @@
 #include "main.h"
-
 char *buffer = NULL;
 char **argv = NULL;
 char *cmd_str = NULL;
 int exit_code = 0;
+alias *alias_list_head = NULL;
 void handle_z(int sig);
 
 /**
@@ -56,6 +56,7 @@ int shell(int c, char *filename)
 		}
 	} while (ret_input != EOF);
 	free_buffer(&buffer);
+	free_aliases();
 	if (STD > 2)
 		close(STD);
 	return (exit_code);
@@ -93,6 +94,7 @@ void handle_EXIT(int exit_no)
 	free_buffer(&cmd_str);
 	free_buffer(&buffer);
 	free_args(argv);
+	free_aliases();
 	exit(exit_no == 0 ? exit_code : exit_no);
 }
 

@@ -13,6 +13,7 @@ int (*map_cmd(char *str))(char **argv)
 		{"exit", handle_exit},
 		{"setenv", handle_setenv},
 		{"unsetenv", handle_unsetenv},
+		{"alias", handle_alias},
 		{NULL, NULL}
 	};
 	while (args[i].cmd_type)

@@ -71,9 +71,7 @@ int parse_cmd(char **argv)
 {
 	char *arr[100];
 	size_t i = 0, j = 0;
-	int ret = -1;
-	int type = 0;
-	int lor = 0;
+	int ret = -1, type = 0, lor = 0;
 
 	while (argv[i])
 	{
@@ -84,11 +82,8 @@ int parse_cmd(char **argv)
 			arr[j] = NULL;
 			if (!lor)
 				ret = execute_helper(arr);
-			j = 0;
-			i++;
-			re_init_arr(&arr[0]);
-			type = 1;
-			lor = 0;
+			parse_cmd_helper_1(&j, &i, &type, &lor,
+					&arr[0], 1);
 			continue;
 		}
 		if (strcmp(argv[i], "||") == 0 && arr[0] != NULL)
@@ -97,11 +92,8 @@ int parse_cmd(char **argv)
 				return (ret);
 			arr[j] = NULL;
 			ret = execute_helper(arr);
-			j = 0;
-			i++;
-			re_init_arr(&arr[0]);
-			type = 2;
-			lor = 1;
+			parse_cmd_helper_1(&j, &i, &type, &lor,
+					&arr[0], 0);
 			continue;
 		}
 		arr[j] = argv[i];
@@ -139,4 +131,33 @@ void re_init_arr(char **opt)
 		*opt = NULL;
 		opt++;
 	}
+}
+
+/**
+ * parse_cmd_helper_1 - An  helper function to abstract repeated
+ * actions
+ * @j: var j from the parse_cmd function to be set to 0
+ * @i: var i to be incremented
+ * @type: To be set based on the flag passed
+ * @lor: To be set based on the flag passed
+ * @arr: The array from parse_cmd to be re_initialized
+ * flag: 1 for && and 0 for ||
+ * Return: void
+ */
+void parse_cmd_helper_1(size_t *j, size_t *i, int *type,
+		int *lor, char **arr, int flag)
+{
+	*j = 0;
+	*i = *i + 1;
+	if (flag)
+	{
+		*type = 1;
+		*lor = 0;
+	}
+	else
+	{
+		*type = 2;
+		*lor = 1;
+	}
+	re_init_arr(arr);
 }

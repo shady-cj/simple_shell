@@ -11,6 +11,14 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <errno.h>
+
+typedef struct alias_struct
+{
+	char *name;
+	char *value;
+	struct alias_struct *link;
+} alias;
+extern alias *alias_list_head;
 /**
  * struct cmd_opt - Defines a set of other commands that cannot be taken care
  * of by the exec functions
@@ -21,7 +29,7 @@ typedef struct cmd_opt
 {
 	char *cmd_type;
 	int (*func)(char **argv);
-} cmd
+} cmd;
 
 
 
@@ -29,7 +37,7 @@ int handle_cd(char **argv);
 int handle_exit(char **argv);
 int handle_setenv(char **argv);
 int handle_unsetenv(char **argv);
-
+int handle_alias(char **argv);
 
 int (*map_cmd(char *str))(char **argv);
 
@@ -111,11 +119,23 @@ int execute_helper(char **argv);
 int dispatch(char *buffer, char **cmd, char ***argv, int interactive);
 void re_init_arr(char **arr);
 int parse_cmd(char **argv);
-
+void parse_cmd_helper_1(size_t *j, size_t *i, int *type,
+		int *lor, char **arr, int flag);
 
 
 
 
 char **variable_substitution(char **argv);
 void check_for_variable(char *cmd_str, char *str);
+
+
+
+int store_aliases(char **argv);
+int print_aliases(void);
+char *get_alias_name(char *str, int *sf);
+char *get_alias_value(char *str);
+int search_alias(char *name);
+int handle_alias(char **argv);
+int add_alias_to_list(char *name, char *value);
+void free_aliases(void);
 #endif
