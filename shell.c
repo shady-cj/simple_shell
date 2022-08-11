@@ -47,6 +47,9 @@ int shell(int c, char *filename)
 		}
 		else
 		{
+			
+			if (get_env("SHLVL") == NULL)
+				setenv("SHLVL", "0\0", 1);
 			buffer = strip(buffer, ret_input);
 			buffer = sub_alias(buffer);
 			if (strlen(buffer) != 0)
