@@ -17,8 +17,9 @@ int main(int argc, char **argv)
 		fd = access(argv[1], R_OK);
 		if (fd == -1)
 		{
-			perror("./shell");
-			return (errno);
+			fprintf(stderr, "./shell: 0: ");
+			fprintf(stderr, "Can't open %s\n", argv[1]);
+			return (127);
 		}
 	}
 	return (shell(argc, argv[1]));
