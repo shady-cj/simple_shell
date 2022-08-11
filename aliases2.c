@@ -103,7 +103,7 @@ char *sub_alias(char *buffer)
 	int j = 0, i = 0;
 	size_t size = 80, k = 0;
 	char str[40];
-	char *new = alloc_str(size), *ptr;
+	char *new, *ptr;
 
 	if (strlen(buffer) == 0)
 		return (buffer);
@@ -116,10 +116,8 @@ char *sub_alias(char *buffer)
 	str[j] = '\0';
 	ptr = get_alias(str);
 	if (ptr == NULL)
-	{
-		free(new);
 		return (buffer);
-	}
+	new =  alloc_str(size);
 	while (*ptr)
 	{
 		new[k] = *ptr;
