@@ -13,7 +13,6 @@ int search_alias(char *name)
 
 	if (alias_list_head == NULL)
 		return (0);
-
 	ptr = alias_list_head;
 
 	while (ptr)

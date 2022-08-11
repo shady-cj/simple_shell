@@ -8,16 +8,17 @@ int handle_cd(char **argv)
 {
 	int ret;
 	char cwd[1024];
-	char oldcwd[1024];
+	char oldcwd[1024], *s;
 
 	if (getcwd(oldcwd, sizeof(oldcwd)) == NULL)
 		perror("error");
 	if (argv[1] == NULL)
-		ret = chdir(getenv("HOME"));
+		ret = chdir(getenv("HOME") ? getenv("HOME") : ".\0");
 	else if (strcmp(argv[1], "-\0") == 0)
 	{
-		printf("%s\n", getenv("OLDPWD"));
-		ret = chdir(getenv("OLDPWD"));
+		s = getenv("OLDPWD") ? getenv("OLDPWD") : getenv("PWD");
+		printf("%s\n", s);
+		ret = chdir(s);
 	}
 	else
 		ret = chdir(argv[1]);
