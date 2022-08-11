@@ -24,8 +24,8 @@ int handle_cd(char **argv)
 		ret = chdir(argv[1]);
 	if (ret != 0)
 	{
-		fprintf(stderr, "%s : %s: %s: ", P_NAME, argv[0], argv[1]);
-		fprintf(stderr, "No such file or directory\n");
+		fprintf(stderr, "%s: 1: %s: ", P_NAME, argv[0]);
+		fprintf(stderr, "can't cd to %s\n", argv[1]);
 		return (1);
 	}
 	else
