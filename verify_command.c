@@ -16,15 +16,16 @@ int get_cmd_from_path(char *cmd)
 	path_dir *head = NULL;
 
 	s = get_env("PATH");
-	if (s == NULL)
-		return (0);
-	dirs = split_path(s);
-	while (dirs[i])
+	if (s != NULL)
 	{
-		add_path(&head, dirs[i]);
-		i++;
+		dirs = split_path(s);
+		while (dirs[i])
+		{
+			add_path(&head, dirs[i]);
+			i++;
+		}
+		free_args(dirs);
 	}
-	free_args(dirs);
 	return (check_path(head, cmd));
 }
 /**
@@ -123,7 +124,11 @@ int check_path(path_dir *head, char *cmd)
 	path_dir *ptr;
 
 	if (head == NULL)
+	{
+		if (stat(cmd, &st) == 0)
+			return (1);
 		return (0);
+	}
 	ptr = head;
 	while (ptr)
 	{
