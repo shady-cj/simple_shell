@@ -20,7 +20,7 @@ int search_alias(char *name)
 	{
 		if (strcmp(ptr->name, name) == 0)
 		{
-			printf("alias %s='%s'\n", ptr->name, ptr->value);
+			printf("%s='%s'\n", ptr->name, ptr->value);
 			return (1);
 		}
 		ptr = ptr->link;
@@ -43,7 +43,7 @@ int print_aliases(void)
 	ptr = alias_list_head;
 	while (ptr)
 	{
-		printf("alias %s='%s'\n", ptr->name, ptr->value); 
+		printf("%s='%s'\n", ptr->name, ptr->value); 
 		ptr = ptr->link;
 	}
 	return (0);
