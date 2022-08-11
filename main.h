@@ -1,6 +1,5 @@
 #ifndef MAIN_H
 #define MAIN_H
-#define _GNU_SOURCE
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -18,6 +17,7 @@
  * Description: Defines a structure to create a linked list in order
  * to store the alias in the shell environment
  */
+extern char **environ;
 typedef struct alias_struct
 {
 	char *name;
@@ -45,6 +45,7 @@ int handle_exit(char **argv);
 int handle_setenv(char **argv);
 int handle_unsetenv(char **argv);
 int handle_alias(char **argv);
+int print_env(char **argv);
 
 int (*map_cmd(char *str))(char **argv);
 

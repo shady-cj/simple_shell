@@ -14,6 +14,7 @@ int (*map_cmd(char *str))(char **argv)
 		{"setenv", handle_setenv},
 		{"unsetenv", handle_unsetenv},
 		{"alias", handle_alias},
+		{"env", print_env},
 		{NULL, NULL}
 	};
 	while (args[i].cmd_type)
