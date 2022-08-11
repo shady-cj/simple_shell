@@ -13,13 +13,13 @@ int handle_exit(char __attribute__((unused))**argv)
 	{
 		if (check_alpha(argv[1]))
 		{
-			fprintf(stderr, "./shell: 1: exit: ");
+			fprintf(stderr, "%s : 1: exit: ", P_NAME);
 			fprintf(stderr, "Illegal number: %s\n", argv[1]);
 			return (2);
 		}
 		if (atoi(argv[1]) < 0)
 		{
-			fprintf(stderr, "./shell: 1: exit: ");
+			fprintf(stderr, "%s : 1: exit: ", P_NAME);
 			fprintf(stderr, "Illegal number: %s\n", argv[1]);
 			return (2);
 		}
