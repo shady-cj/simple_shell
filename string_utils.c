@@ -11,6 +11,8 @@ char *strip(char *buffer, size_t size)
 {
 	size_t i = size - 1, j, k;
 
+	if (size == 0)
+		return (buffer);
 	while (buffer[i] == ' ' && i > 0)
 	{
 		buffer[i] = '\0';
