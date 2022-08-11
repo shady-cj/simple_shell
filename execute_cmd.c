@@ -52,11 +52,11 @@ int execute_helper(char **argv)
 		isdir = is_dir_check(argv[0]);
 		if (v_cmd == 0)
 		{
-			fprintf(stderr, "./shell: %s: ", argv[0]);
+			fprintf(stderr, "%s: 1: %s: ", P_NAME, argv[0]);
 			if (isdir)
 				fprintf(stderr, "No such file or directory\n");
 			else
-				fprintf(stderr, "command not found\n");
+				fprintf(stderr, "not found\n");
 			return (127);
 		}
 		child_p = fork();

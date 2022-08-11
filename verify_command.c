@@ -16,6 +16,8 @@ int get_cmd_from_path(char *cmd)
 	path_dir *head = NULL;
 
 	s = get_env("PATH");
+	if (s == NULL)
+		return (0);
 	dirs = split_path(s);
 	while (dirs[i])
 	{

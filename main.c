@@ -1,4 +1,6 @@
 #include "main.h"
+
+char *P_NAME = NULL;
 /**
  * main - This is the entry point
  * for now it's main functionality is to initiate the shell
@@ -12,6 +14,7 @@ int main(int argc, char **argv)
 {
 	int fd;
 
+	P_NAME = argv[0];
 	if (argc > 1)
 	{
 		fd = access(argv[1], R_OK);

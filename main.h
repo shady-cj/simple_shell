@@ -19,6 +19,7 @@ typedef struct alias_struct
 	struct alias_struct *link;
 } alias;
 extern alias *alias_list_head;
+extern char *P_NAME;
 /**
  * struct cmd_opt - Defines a set of other commands that cannot be taken care
  * of by the exec functions
