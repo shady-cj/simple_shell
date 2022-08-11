@@ -9,7 +9,7 @@
 int handle_setenv(char **argv)
 {
 	if (argv[1] == NULL || argv[2] == NULL)
-		fprintf(stderr, "Err:");
+		return (0);
 	if (setenv(argv[1], argv[2], 1) != 0)
 	{
 		perror("Error");
