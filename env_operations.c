@@ -33,5 +33,7 @@ int handle_unsetenv(char **argv)
 		perror("Error");
 		return (1);
 	}
+	if (get_env("SHLVL") == NULL)
+		setenv("SHLVL", "0\0", 1);
 	return (0);
 }
