@@ -104,6 +104,7 @@ char *get_alias_value(char *str)
 	char *p = str;
 	int i = 0;
 	char *buf = malloc(sizeof(char) * 500);
+	char *pl;
 
 	if (buf == NULL)
 		return (NULL);
@@ -124,6 +125,13 @@ char *get_alias_value(char *str)
 			p++;
 		}
 		buf[i] = '\0';
+		pl = get_alias(buf);
+		if (pl != NULL)
+		{
+			free(buf);
+			buf = strdup(pl);
+			return (buf);
+		}
 		return (buf);
 	}
 	free(buf);
