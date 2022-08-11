@@ -36,7 +36,7 @@ int execute(char *buffer, size_t i, char ***argv)
  */
 int execute_helper(char **argv)
 {
-	int v_cmd, child_p, isdir, status = 0;
+	int v_cmd, child_p, status = 0;
 	int (*func)(char **);
 
 	if (argv[0] == NULL)
@@ -49,14 +49,10 @@ int execute_helper(char **argv)
 	else
 	{
 		v_cmd = get_cmd_from_path(argv[0]);
-		isdir = is_dir_check(argv[0]);
 		if (v_cmd == 0)
 		{
-			fprintf(stderr, "%s: 1: %s: ", P_NAME, argv[0]);
-			if (isdir)
-				fprintf(stderr, "No such file or directory\n");
-			else
-				fprintf(stderr, "not found\n");
+			fprintf(stderr, "%s: %lu: %s: ", P_NAME, CODE_C, argv[0]);
+			fprintf(stderr, "not found\n");
 			return (127);
 		}
 		child_p = fork();

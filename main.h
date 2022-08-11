@@ -19,6 +19,7 @@
  * to store the alias in the shell environment
  */
 extern char **environ;
+extern size_t CODE_C;
 typedef struct alias_struct
 {
 	char *name;
@@ -112,10 +113,6 @@ int shell(int, char *);
 void handle_SIGINT(int __attribute__((unused))sig);
 void handle_EXIT(int exit_no);
 int get_exit_code(void);
-
-
-int is_dir_check(char *str);
-
 
 
 

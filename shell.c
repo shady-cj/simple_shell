@@ -47,6 +47,7 @@ int shell(int c, char *filename)
 		}
 		else
 		{
+			CODE_C++;
 			buffer = strip(buffer, ret_input);
 			buffer = sub_alias(buffer);
 			if (strlen(buffer) != 0)

@@ -24,7 +24,7 @@ int handle_cd(char **argv)
 		ret = chdir(argv[1]);
 	if (ret != 0)
 	{
-		fprintf(stderr, "%s: 1: %s: ", P_NAME, argv[0]);
+		fprintf(stderr, "%s: %lu: %s: ", P_NAME, CODE_C, argv[0]);
 		fprintf(stderr, "can't cd to %s\n", argv[1]);
 		return (1);
 	}
@@ -44,20 +44,3 @@ int handle_cd(char **argv)
 	return (0);
 }
 
-/**
- * is_dir_check - This checks if the command contains a directory
- * @str: The string to check through
- * Return: 1 if found and 0 if none
- */
-int is_dir_check(char *str)
-{
-	int i = 0;
-
-	while (str[i])
-	{
-		if (str[i] == '/')
-			return (1);
-		i++;
-	}
-	return (0);
-}

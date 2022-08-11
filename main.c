@@ -1,5 +1,5 @@
 #include "main.h"
-
+size_t CODE_C = 0;
 char *P_NAME = NULL;
 /**
  * main - This is the entry point
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 		fd = access(argv[1], R_OK);
 		if (fd == -1)
 		{
-			fprintf(stderr, "%s: 0: ", P_NAME);
+			fprintf(stderr, "%s: %lu: ", P_NAME, CODE_C);
 			fprintf(stderr, "Can't open %s\n", argv[1]);
 			return (127);
 		}
