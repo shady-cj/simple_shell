@@ -24,8 +24,8 @@ int handle_cd(char **argv)
 		ret = chdir(argv[1]);
 	if (ret != 0)
 	{
-		printf("./shell: %s: %s: ", argv[0], argv[1]);
-		printf("No such file or directory\n");
+		fprintf(stderr, "./shell: %s: %s: ", argv[0], argv[1]);
+		fprintf(stderr, "No such file or directory\n");
 		return (1);
 	}
 	else
