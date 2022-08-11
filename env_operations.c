@@ -35,3 +35,23 @@ int handle_unsetenv(char **argv)
 	}
 	return (0);
 }
+
+/**
+ * print_env - Prints out the environment variable of the current shell
+ * @argv: The list of commands
+ * Return: status code
+ */
+
+int print_env(char __attribute__((unused)) **argv)
+{
+	int i = 0;
+
+	if (environ == NULL)
+		return (0);
+	while (environ[i])
+	{
+		printf("%s\n", environ[i]);
+		i++;
+	}
+	return (0);
+}
