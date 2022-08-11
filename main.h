@@ -11,7 +11,13 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <errno.h>
-
+/**
+ * alias_struct - Defines an alias structure for the shell env
+ * @name: The name of the alias
+ * @value: The value to the alias that is set
+ * Description: Defines a structure to create a linked list in order
+ * to store the alias in the shell environment
+ */
 typedef struct alias_struct
 {
 	char *name;
