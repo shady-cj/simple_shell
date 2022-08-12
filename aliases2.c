@@ -107,6 +107,7 @@ char *sub_alias(char *buffer)
 
 	if (strlen(buffer) == 0)
 		return (buffer);
+	buffer = check_space(buffer);
 	while (buffer[i] != ' ' && buffer[i] != '\0')
 	{
 		str[j] = buffer[i];
