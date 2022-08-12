@@ -390,3 +390,104 @@ int get_exit_code(void)
         return (exit_code);
 }
 ```
+
+
+### HANDLE THE _&&_ AND _||_ LOGICAL OPERATORS
+```
+$ pedn || pwd
+./shell: 1: pedn: not found
+/data/data/com.termux/files/home/ceejay/alx/simple_shell
+$ pwd || ls
+/data/data/com.termux/files/home/ceejay/alx/simple_shell
+$ pwd && ls
+/data/data/com.termux/files/home/ceejay/alx/simple_shell
+AUTHORS             compile.sh        execute_cmd.c    map_function.c    string_utils.c
+BETTY_CHECK_ERRORS  dir_cmds.c        free_and_init.c  mem_management.c  test.txt
+README.md           dispatch_cmd.c    getline.c        quit_cmds.c       utils
+aliases.c           env_operations.c  main.c           shell             variables_handler.c
+aliases2.c          env_utils.c       main.h           shell.c           verify_command.c
+$ pwg && ls
+./shell: 4: pwg: not found
+$ pwd || ls && find . -name shell.c
+/data/data/com.termux/files/home/ceejay/alx/simple_shell
+./shell.c
+$
+```
+
+### THE USE OF _ALIAS_
+#### USAGE
+```
+$ alias alias1=/bin/ls alias2=/bin/pwd alias3=/bin/echo
+$ alias
+alias1='/bin/ls'
+alias2='/bin/pwd'
+alias3='/bin/echo'
+$ alias alias1 alias2 alias3=/bin/cat
+alias1='/bin/ls'
+alias2='/bin/pwd'
+$ alias alias3
+alias3='/bin/cat'
+$
+```
+
+### HANDLE VARIABLE REPLACEMENT
+```
+$ echo $PATH
+/data/data/com.termux/files/usr/bin
+$ alias j=$PATH
+$ aliad
+./shell: 3: aliad: not found
+$ alias
+j='/data/data/com.termux/files/usr/bin'
+$ echo $$
+29200
+$ echo $?
+0
+$ hdj
+./shell: 7: hdj: not found
+$ echo $?
+127
+$ cd /not-existing
+./shell: 9: cd: can't cd to /not-existing
+$ echo $?
+1
+$ echo $OLDPWD
+/data/data/com.termux/files/home
+$
+```
+
+### HANDLE COMMENTS
+
+```
+$ ls # pwd
+AUTHORS             compile.sh        execute_cmd.c    map_function.c    string_utils.c
+BETTY_CHECK_ERRORS  dir_cmds.c        free_and_init.c  mem_management.c  test.txt
+README.md           dispatch_cmd.c    getline.c        quit_cmds.c       utils
+aliases.c           env_operations.c  main.c           shell             variables_handler.c
+aliases2.c          env_utils.c       main.h           shell.c           verify_command.c
+```
+
+### HANDLE FILE AS INPUT
+The shell can read through files and execute commands line by line
+The following example takes test.txt as input and execute the file
+
+```
+$ cat test.txt
+ls
+pwdhg
+echo $? && echo $$
+
+
+
+$ ./shell test.txt
+AUTHORS             compile.sh        execute_cmd.c    map_function.c    string_utils.c
+BETTY_CHECK_ERRORS  dir_cmds.c        free_and_init.c  mem_management.c  test.txt
+README.md           dispatch_cmd.c    getline.c        quit_cmds.c       utils
+aliases.c           env_operations.c  main.c           shell             variables_handler.c
+aliases2.c          env_utils.c       main.h           shell.c           verify_command.c
+./shell: 2: pwdhg: not found
+127
+29800
+$
+```
+
