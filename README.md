@@ -113,7 +113,6 @@ $ exit 9d8
 ```
 
 ### SUPPRESSES CONTROL C AND CONTROL Z
-```
 
 ### ENV BUILT IN
 ```
