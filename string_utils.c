@@ -74,7 +74,7 @@ char **split(char *buffer)
 		{
 			if (*s != '\n')
 			{
-				if (j == buf_size_j)
+				if (j == buf_size_j - 2)
 				{
 					buf_size_j += 20;
 					argv[i] = alloc_str_arr(buf_size_j,
@@ -183,7 +183,7 @@ char *check_space(char *buffer)
 		return (buffer);
 	while (buffer[i])
 	{
-		if (j == buf_size)
+		if (j == buf_size - 2)
 		{
 			buf_size += 20;
 			str = realloc(str, buf_size);
@@ -200,6 +200,13 @@ char *check_space(char *buffer)
 					str[j++] = ' ';
 				while (buffer[i] == c && n < 2 && buffer[i])
 				{
+					if (j == buf_size - 2)
+					{
+						buf_size += 20;
+						str = realloc(str, buf_size);
+						if (str == NULL)
+							return (buffer);
+					}
 					str[j++] = buffer[i];
 					i++;
 					n++;

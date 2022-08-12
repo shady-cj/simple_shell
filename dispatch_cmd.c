@@ -36,7 +36,7 @@ int dispatch(char *buffer, char **cmd_str, char ***argv, int interactive)
 			i++;
 			continue;
 		}
-		if (j == buf_size)
+		if (j == buf_size - 2)
 		{
 			buf_size *= 2;
 			cmd = realloc(cmd, buf_size);

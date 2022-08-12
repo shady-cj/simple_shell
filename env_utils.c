@@ -50,7 +50,7 @@ char **get_key_value(char *s)
 		return (NULL);
 	while (s[i] != '=')
 	{
-		if (i == key_size)
+		if (i == key_size - 2)
 		{
 			key_size += 40;
 			key = increase_key_size(key, argv, key_size);
@@ -63,7 +63,7 @@ char **get_key_value(char *s)
 	i++;
 	while (s[i])
 	{
-		if (j == value_size)
+		if (j == value_size - 2)
 		{
 			value_size += 1024;
 			value = increase_value_size(value, argv, value_size);
