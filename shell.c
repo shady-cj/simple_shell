@@ -1,10 +1,10 @@
 #include "main.h"
+
 char *buffer = NULL;
 char **argv = NULL;
 char *cmd_str = NULL;
 int exit_code = 0;
 alias *alias_list_head = NULL;
-void handle_z(int sig);
 
 /**
  * shell - This is the main function that implements the shell

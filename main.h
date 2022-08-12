@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <errno.h>
+
 /**
  * alias_struct - Defines an alias structure for the shell env
  * @name: The name of the alias
@@ -18,16 +19,25 @@
  * Description: Defines a structure to create a linked list in order
  * to store the alias in the shell environment
  */
-extern char **environ;
-extern size_t CODE_C;
 typedef struct alias_struct
 {
 	char *name;
 	char *value;
 	struct alias_struct *link;
 } alias;
+
+
+
+/* GLOBAL VARIABLES */
+
 extern alias *alias_list_head;
 extern char *P_NAME;
+extern size_t CODE_C;
+
+
+
+
+void handle_z(int sig);
 /**
  * struct cmd_opt - Defines a set of other commands that cannot be taken care
  * of by the exec functions

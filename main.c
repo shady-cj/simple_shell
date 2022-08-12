@@ -1,6 +1,8 @@
 #include "main.h"
-size_t CODE_C = 0;
+
+
 char *P_NAME = NULL;
+size_t CODE_C = 0;
 /**
  * main - This is the entry point
  * for now it's main functionality is to initiate the shell
