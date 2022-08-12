@@ -51,4 +51,71 @@ AUTHORS             compile.sh        execute_cmd.c    map_function.c    string_
 BETTY_CHECK_ERRORS  dir_cmds.c        free_and_init.c  mem_management.c  test.txt
 README.md           dispatch_cmd.c    getline.c        quit_cmds.c       utils
 aliases.c           env_operations.c  main.c           shell             variables_handler.c
-aliases2.c          env_utils.c       main.h           shell.c           verify_command.c
+aliases2.c          env_utils.c       main.h           shell.c           verify_command.
+```
+
+### HANDLE ARGUMENTS WITH OR WITHOUT FULL PATH
+It can also handle commands with arguments
+```
+$ /bin/ls -la
+total 142
+drwx------ 4 u0_a283 u0_a283  3488 Aug 12 12:48 .
+drwx------ 5 u0_a283 u0_a283  3488 Jul 28 16:51 ..
+drwx------ 7 u0_a283 u0_a283  3488 Aug 12 08:53 .git
+-rw------- 1 u0_a283 u0_a283    92 Aug 11 13:21 AUTHORS
+-rw------- 1 u0_a283 u0_a283  4992 Aug 12 08:33 BETTY_CHECK_ERRORS
+-rw------- 1 u0_a283 u0_a283  3962 Aug 12 12:48 README.md
+-rw------- 1 u0_a283 u0_a283  3304 Aug 12 11:01 aliases.c
+-rw------- 1 u0_a283 u0_a283  2096 Aug 12 02:22 aliases2.c
+-rwx------ 1 u0_a283 u0_a283    72 Aug  3 12:47 compile.sh
+-rw------- 1 u0_a283 u0_a283   869 Aug 12 01:40 dir_cmds.c
+-rw------- 1 u0_a283 u0_a283  3726 Aug 12 02:23 dispatch_cmd.c
+-rw------- 1 u0_a283 u0_a283   937 Aug 11 14:57 env_operations.c
+-rw------- 1 u0_a283 u0_a283  2996 Aug 12 02:20 env_utils.c
+-rw------- 1 u0_a283 u0_a283  1534 Aug 12 01:40 execute_cmd.c
+-rw------- 1 u0_a283 u0_a283   675 Aug 10 17:48 free_and_init.c
+-rw------- 1 u0_a283 u0_a283   860 Aug 12 02:18 getline.c
+-rw------- 1 u0_a283 u0_a283   681 Aug 12 08:51 main.c
+-rw------- 1 u0_a283 u0_a283  3423 Aug 12 08:53 main.h
+-rw------- 1 u0_a283 u0_a283   537 Aug 11 14:48 map_function.c
+-rw------- 1 u0_a283 u0_a283  2233 Aug 10 14:21 mem_management.c
+-rw------- 1 u0_a283 u0_a283   902 Aug 11 09:24 quit_cmds.c
+-rwx------ 1 u0_a283 u0_a283 31352 Aug 12 08:54 shell
+-rw------- 1 u0_a283 u0_a283  2349 Aug 12 08:51 shell.c
+-rw------- 1 u0_a283 u0_a283  4088 Aug 12 02:25 string_utils.c
+-rw------- 1 u0_a283 u0_a283    32 Aug 10 14:21 test.txt
+drwx------ 2 u0_a283 u0_a283  3488 Aug  9 22:40 utils
+-rw------- 1 u0_a283 u0_a283  1653 Aug 12 02:22 variables_handler.c
+-rw------- 1 u0_a283 u0_a283  3147 Aug 11 09:19 verify_command.c
+$ readlink -e shell 
+/data/data/com.termux/files/home/ceejay/alx/simple_shell/shell
+$
+```
+
+### HANDLE EXIT
+#### WITHOUT EXIT NUMBER
+```
+$ exit
+```
+#### WITH EXIT NUMBER
+```
+$ exit 98
+~/.../alx/simple_shell $ echo $?
+98
+`
+```
+#### THROWS ERROR IF AN INVALID CODE IS TYPED
+```
+$ exit -98
+./shell: 1: exit: Illegal number: -98
+$ exit 9d8
+./shell: 1: exit: Illegal number: 9d8
+```
+
+### SUPPRESSES CONTROL C AND CONTROL Z
+```
+$ ^C
+$ ^C
+$ ^Z
+$ 
+```c
