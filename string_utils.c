@@ -175,7 +175,7 @@ void _strrev(char *str, int n)
 char *check_space(char *buffer)
 {
 	char *str, c;
-	size_t buf_size = strlen(buffer), i = 0, j = 0;
+	size_t buf_size = 40, i = 0, j = 0;
 	int flag = 0, n = 0;
 
 	str = malloc(sizeof(char) * buf_size);
