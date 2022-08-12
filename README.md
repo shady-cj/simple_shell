@@ -5,7 +5,7 @@
 The linux operating system is a very popular and powerful operating system with a lot of powerful features which is why it is the most used in fields like devops, cybersecurity, hacking etc... There are different distributions of Linux OS in which some of this distributions have sub distributions... An example of a Linux distro is **UBUNTU** which in turn has sub distros such as _Lubuntu_ and _Xubuntu_.
 This Project is about building a linux shell similar to the traditional linux terminal.. With a lot of functionality although not all.. using **C** programming Language.
 
-This project combines different concept from C programming ranging from reading files, taking inputsz reading directories etc...
+This project combines different concept from C programming ranging from reading files, taking inputs reading directories etc... to a implement a simple shell with functionalities similar to that of /bin/sh
 
 ## USAGE
 
@@ -113,7 +113,12 @@ $ exit 9d8
 ```
 
 ### SUPPRESSES CONTROL C AND CONTROL Z
-
+```
+$ ^C
+$ ^C
+$ ^Z
+$ ^Z
+```
 ### ENV BUILT IN
 ```
 $ env
