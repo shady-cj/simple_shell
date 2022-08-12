@@ -160,3 +160,67 @@ void _strrev(char *str, int n)
 		l--;
 	}
 }
+/**
+ * check_space - This function checks for && and || and make sure
+ * they are properly spaced
+ * @buffer: The buffer
+ * Description: This helps to separate commands and the logical
+ * statements like && and || the flag variable in the function
+ * helps to keep track of which of & and | has been encountered
+ * while copying over the string. where flag is 1 it means & has
+ * been encountered while flag is 2 it means | has being encountered
+ * and if 0 then none have been encountered
+ * Return: The newly created buffer
+ */
+char *check_space(char *buffer)
+{
+	char *str, c;
+	size_t buf_size = strlen(buffer), i = 0, j = 0;
+	int flag = 0, n = 0;
+
+	str = malloc(sizeof(char) * buf_size);
+	if (str == NULL)
+		return (buffer);
+	while (buffer[i])
+	{
+		if (j == buf_size)
+		{
+			buf_size += 20;
+			str = realloc(str, buf_size);
+			if (str == NULL)
+				return (buffer);
+		}
+		if (buffer[i] == '&' || buffer[i] == '|')
+		{
+			c = buffer[i];
+			if (buffer[i-1] != ' ')
+			{
+				n = flag;
+				if (!flag)
+					str[j++] = ' ';
+				while (buffer[i] == c && n < 2 && buffer[i])
+				{
+					str[j++] = buffer[i];
+					i++;
+					n++;
+				}
+				if (buffer[i] == '\0')
+					continue;
+				if (buffer[i] != ' ')
+					str[j++] = ' ';
+				flag = 0;
+				n = 0;
+				if (buffer[i] == c)
+					flag = 1;
+			}
+			else
+				flag = 1;
+		}
+		str[j] = buffer[i];
+		j++;
+		i++;
+	}
+	str[j] = '\0';
+	free(buffer);
+	return (str);
+}

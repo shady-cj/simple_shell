@@ -1,4 +1,0 @@
-shell.c --- global variable
-dispatch_cmd.c ---line more than 40
-string_utils- 40 lines - 4 exvess
-variable_handler.c- 40 lines
