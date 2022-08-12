@@ -491,3 +491,19 @@ aliases2.c          env_utils.c       main.h           shell.c           verify_
 $
 ```
 
+### NON-INTERACTIVE MODE.
+
+The shell can also run in NON-INTERACTIVE mode
+Example
+```
+~/.../alx/simple_shell $ echo "ls
+> pwd
+> echo $PATH" | ./shell
+AUTHORS             compile.sh        execute_cmd.c    map_function.c    string_utils.c
+BETTY_CHECK_ERRORS  dir_cmds.c        free_and_init.c  mem_management.c  test.txt
+README.md           dispatch_cmd.c    getline.c        quit_cmds.c       utils
+aliases.c           env_operations.c  main.c           shell             variables_handler.c
+aliases2.c          env_utils.c       main.h           shell.c           verify_command.c
+/data/data/com.termux/files/home/ceejay/alx/simple_shell
+/data/data/com.termux/files/usr/bin
+```
