@@ -211,3 +211,182 @@ ANDROID_ART_ROOT=/apex/com.android.art
 OLDPWD=/data/data/com.termux/files/home
 _=./shell
 ```
+
+
+### CHANGE DIRECTORY.
+By default cd is not present in the bin directory so exec doesn't recognize it.. so a built-in cd was implemented thus you can cd into directories just like the normal sh shell and displays errors if 
+directory doesn't exist
+
+#### CD TO A DIRECTORY THAT EXIST USING BOTH RELATIVE AND ABSOLUTE PATH
+```
+$ cd /bin
+$ pwd
+/system/bin
+```
+ USING RELATIVE PATH
+```
+$ cd ..
+$ pwd
+/data/data/com.termux/files/home/ceejay/alx
+```
+
+#### CD - , CD 
+while running cd it keeps track of the present and old pwd thus cd - would take you back to the old pwd and cd takes you to the home directory
+```
+$ cd
+$ pwd
+/data/data/com.termux/files/home
+$ cd -
+/data/data/com.termux/files/home/ceejay/alx/simple_shell
+$ pwd
+/data/data/com.termux/files/home/ceejay/alx/simple_shell
+```
+
+### HANDLE COMMANDS SEPARATOR ';'
+Running multiple commands is possible by using the **;** separator.. 
+example
+
+```
+$ pwd; ls -la; cat shell.c
+/data/data/com.termux/files/home/ceejay/alx/simple_shell
+total 158
+drwx------ 4 u0_a283 u0_a283  3488 Aug 12 13:56 .
+drwx------ 5 u0_a283 u0_a283  3488 Jul 28 16:51 ..
+drwx------ 7 u0_a283 u0_a283  3488 Aug 12 08:53 .git
+-rw------- 1 u0_a283 u0_a283    92 Aug 11 13:21 AUTHORS
+-rw------- 1 u0_a283 u0_a283  4992 Aug 12 08:33 BETTY_CHECK_ERRORS
+-rw------- 1 u0_a283 u0_a283 17192 Aug 12 13:56 README.md
+-rw------- 1 u0_a283 u0_a283  3304 Aug 12 11:01 aliases.c
+-rw------- 1 u0_a283 u0_a283  2096 Aug 12 02:22 aliases2.c
+-rwx------ 1 u0_a283 u0_a283    72 Aug  3 12:47 compile.sh
+-rw------- 1 u0_a283 u0_a283   869 Aug 12 01:40 dir_cmds.c
+-rw------- 1 u0_a283 u0_a283  3726 Aug 12 02:23 dispatch_cmd.c
+-rw------- 1 u0_a283 u0_a283   937 Aug 11 14:57 env_operations.c
+-rw------- 1 u0_a283 u0_a283  2996 Aug 12 02:20 env_utils.c
+-rw------- 1 u0_a283 u0_a283  1534 Aug 12 01:40 execute_cmd.c
+-rw------- 1 u0_a283 u0_a283   675 Aug 10 17:48 free_and_init.c
+-rw------- 1 u0_a283 u0_a283   860 Aug 12 02:18 getline.c
+-rw------- 1 u0_a283 u0_a283   681 Aug 12 08:51 main.c
+-rw------- 1 u0_a283 u0_a283  3423 Aug 12 08:53 main.h
+-rw------- 1 u0_a283 u0_a283   537 Aug 11 14:48 map_function.c
+-rw------- 1 u0_a283 u0_a283  2233 Aug 10 14:21 mem_management.c
+-rw------- 1 u0_a283 u0_a283   902 Aug 11 09:24 quit_cmds.c
+-rwx------ 1 u0_a283 u0_a283 31352 Aug 12 08:54 shell
+-rw------- 1 u0_a283 u0_a283  2349 Aug 12 08:51 shell.c
+-rw------- 1 u0_a283 u0_a283  4088 Aug 12 02:25 string_utils.c
+-rw------- 1 u0_a283 u0_a283    32 Aug 10 14:21 test.txt
+drwx------ 2 u0_a283 u0_a283  3488 Aug  9 22:40 utils
+-rw------- 1 u0_a283 u0_a283  1653 Aug 12 02:22 variables_handler.c
+-rw------- 1 u0_a283 u0_a283  3147 Aug 11 09:19 verify_command.c
+#include "main.h"
+
+char *buffer = NULL;
+char **argv = NULL;
+char *cmd_str = NULL;
+int exit_code = 0;
+alias *alias_list_head = NULL;
+
+/**
+ * shell - This is the main function that implements the shell
+ * @c: The number of argument from the command line
+ * @filename: The filename if any was passed at the command line
+ * Description: The shell function is the main function that connects other
+ * functions it takes in the inputs and returns corresponding output as the
+ * traditional shell would
+ * Return: Status code.
+ */
+
+int shell(int c, char *filename)
+{
+        size_t buf_size = 40;
+        ssize_t ret_input;
+        int interactive = isatty(STDIN_FILENO), STD;
+
+        STD = STDIN_FILENO;
+        signal(SIGTSTP, &handle_z);
+        signal(SIGINT, &handle_SIGINT);
+        if (c > 1)
+        {
+                interactive = 0;
+                STD = open(filename, O_RDONLY);
+                if (STD == -1)
+                {
+                        perror("./shell");
+                        return (errno);
+                }
+        }
+        if (interactive)
+                write(STDOUT_FILENO, "$ ", 2);
+        do {
+                ret_input = _getline(&buffer, &buf_size, STD);
+                if (ret_input == EOF)
+                {
+                        if (interactive)
+                                write(STDOUT_FILENO, "\n", 1);
+                        continue;
+                }
+                else
+                {
+                        CODE_C++;
+                        buffer = strip(buffer, ret_input);
+                        buffer = sub_alias(buffer);
+                        if (strlen(buffer) != 0)
+                                exit_code = dispatch(buffer, &cmd_str, &argv, interactive);
+                        else
+                                exit_code = 0;
+                        re_initializer(&buffer, &buf_size, interactive, 40, 1);
+                }
+        } while (ret_input != EOF);
+        free_buffer(&buffer);
+        free_aliases();
+        if (STD > 2)
+                close(STD);
+        return (exit_code);
+}
+
+/**
+ * handle_z - This handles call to ctrl Z to prevent from sending the process
+ * background
+ * @sig: The signal id
+ * Return: void
+ */
+void handle_z(int __attribute__((unused))sig)
+{
+        printf("\n$ ");
+        fflush(stdout);
+}
+/**
+ * handle_SIGINT - Handles signal interrupt i.e when ctrl-c is typed
+ * @sig: The signal id
+ * Return: void
+ */
+void handle_SIGINT(int __attribute__((unused))sig)
+{
+        exit_code = 130;
+        printf("\n$ ");
+        fflush(stdout);
+}
+/**
+ * handle_EXIT - Handles the termination signal when exit is called
+ * @exit_no: The exit number
+ * Return: void
+ */
+void handle_EXIT(int exit_no)
+{
+        free_buffer(&cmd_str);
+        free_buffer(&buffer);
+        free_args(argv);
+        free_aliases();
+        exit(exit_no == 0 ? exit_code : exit_no);
+}
+
+/**
+ * get_exit_code - An helper function to get the current exit code
+ * Return: the exit code
+ */
+
+int get_exit_code(void)
+{
+        return (exit_code);
+}
+```
