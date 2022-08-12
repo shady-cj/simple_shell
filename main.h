@@ -137,7 +137,7 @@ void re_init_arr(char **arr);
 int parse_cmd(char **argv);
 void parse_cmd_helper_1(size_t *j, size_t *i, int *type,
 		int *lor, char **arr, int flag);
-
+int is_dir_check(char *str);
 
 
 

@@ -122,10 +122,11 @@ int check_path(path_dir *head, char *cmd)
 	struct stat st;
 	char s[1024];
 	path_dir *ptr;
+	int isdir = is_dir_check(cmd);
 
 	if (head == NULL)
 	{
-		if (stat(cmd, &st) == 0)
+		if (stat(cmd, &st) == 0 && isdir)
 			return (1);
 		return (0);
 	}
@@ -135,7 +136,8 @@ int check_path(path_dir *head, char *cmd)
 		memcpy(s, ptr->dir, strlen(ptr->dir) + 1);
 		strcat(s, "/\0");
 		strcat(s, cmd);
-		if (stat(cmd, &st) == 0 || stat(s, &st) == 0)
+		if ((stat(cmd, &st) == 0 && isdir) ||
+				stat(s, &st) == 0)
 		{
 			free_linked_path(head);
 			return (1);

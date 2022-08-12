@@ -48,7 +48,7 @@ int execute_helper(char **argv)
 	}
 	else
 	{
-		v_cmd = get_cmd_from_path(argv[0]);
+		v_cmd = get_cmd_from_path(argv[0]);	
 		if (v_cmd == 0)
 		{
 			fprintf(stderr, "%s: %lu: %s: ", P_NAME, CODE_C, argv[0]);
@@ -68,4 +68,23 @@ int execute_helper(char **argv)
 	else
 		status = 1;
 	return (status);
+}
+
+/**
+ * is_dir_check - Checks if command is an absolute or relative path as in
+ * /../ or .././
+ * @str: The command to check
+ * Return: 1 if found 0 if not
+ */
+int is_dir_check(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		if (str[i] == '/')
+			return (1);
+		i++;
+	}
+	return (0);
 }
