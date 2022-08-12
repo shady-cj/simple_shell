@@ -114,8 +114,100 @@ $ exit 9d8
 
 ### SUPPRESSES CONTROL C AND CONTROL Z
 ```
-$ ^C
-$ ^C
-$ ^Z
-$ 
-```c
+
+### ENV BUILT IN
+```
+$ env
+SHELL=/data/data/com.termux/files/usr/bin/bash
+COLORTERM=truecolor
+HISTCONTROL=ignoreboth
+PREFIX=/data/data/com.termux/files/usr
+TERMUX_IS_DEBUGGABLE_BUILD=0
+TERMUX_MAIN_PACKAGE_FORMAT=debian
+PWD=/data/data/com.termux/files/home/ceejay/alx/simple_shell
+TERMUX_VERSION=0.118.0
+EXTERNAL_STORAGE=/sdcard
+LD_PRELOAD=/data/data/com.termux/files/usr/lib/libtermux-exec.so
+HOME=/data/data/com.termux/files/home
+LANG=en_US.UTF-8
+TERMUX_APK_RELEASE=F_DROID
+DEX2OATBOOTCLASSPATH=/apex/com.android.art/javalib/core-oj.jar:/apex/com.android.art/javalib/core-libart.jar:/apex/com.android.art/javalib/okhttp.jar:/apex/com.android.art/javalib/bouncycastle.jar:/apex/com.android.art/javalib/apache-xml.jar:/system/framework/framework.jar:/system/framework/framework-graphics.jar:/system/framework/ext.jar:/system/framework/telephony-common.jar:/system/framework/voip-common.jar:/system/framework/ims-common.jar:/apex/com.android.i18n/javalib/core-icu4j.jar:/system/framework/trans-framework.jar:/system/framework/mediatek-telephony-base.jar:/system/framework/mediatek-telephony-common.jar:/system/framework/mediatek-common.jar:/system/framework/mediatek-framework.jar:/system/framework/mediatek-ims-common.jar:/system/framework/mediatek-ims-base.jar:/system/framework/mediatek-telecom-common.jar
+TMPDIR=/data/data/com.termux/files/usr/tmp
+ANDROID_DATA=/data
+TERM=xterm-256color
+ANDROID_I18N_ROOT=/apex/com.android.i18n
+SHLVL=1
+ANDROID_ROOT=/system
+BOOTCLASSPATH=/apex/com.android.art/javalib/core-oj.jar:/apex/com.android.art/javalib/core-libart.jar:/apex/com.android.art/javalib/okhttp.jar:/apex/com.android.art/javalib/bouncycastle.jar:/apex/com.android.art/javalib/apache-xml.jar:/system/framework/framework.jar:/system/framework/framework-graphics.jar:/system/framework/ext.jar:/system/framework/telephony-common.jar:/system/framework/voip-common.jar:/system/framework/ims-common.jar:/apex/com.android.i18n/javalib/core-icu4j.jar:/system/framework/trans-framework.jar:/system/framework/mediatek-telephony-base.jar:/system/framework/mediatek-telephony-common.jar:/system/framework/mediatek-common.jar:/system/framework/mediatek-framework.jar:/system/framework/mediatek-ims-common.jar:/system/framework/mediatek-ims-base.jar:/system/framework/mediatek-telecom-common.jar:/apex/com.android.appsearch/javalib/framework-appsearch.jar:/apex/com.android.conscrypt/javalib/conscrypt.jar:/apex/com.android.ipsec/javalib/android.net.ipsec.ike.jar:/apex/com.android.media/javalib/updatable-media.jar:/apex/com.android.mediaprovider/javalib/framework-mediaprovider.jar:/apex/com.android.os.statsd/javalib/framework-statsd.jar:/apex/com.android.permission/javalib/framework-permission.jar:/apex/com.android.permission/javalib/framework-permission-s.jar:/apex/com.android.scheduling/javalib/framework-scheduling.jar:/apex/com.android.sdkext/javalib/framework-sdkextensions.jar:/apex/com.android.tethering/javalib/framework-connectivity.jar:/apex/com.android.tethering/javalib/framework-tethering.jar:/apex/com.android.wifi/javalib/framework-wifi.jar:/apex/com.transsion.mi.os.framework/javalib/os-framework.jar
+ANDROID_TZDATA_ROOT=/apex/com.android.tzdata
+TERMUX_APP_PID=4681
+PATH=/data/data/com.termux/files/usr/bin
+ANDROID_ART_ROOT=/apex/com.android.art
+OLDPWD=/data/data/com.termux/files/home
+_=./shell
+```
+This is a built-in command and different from the built-in command in the bin directory
+Thus if the PATH variable is cleared the `env` command is summoned it wont through an error
+
+### SETTING AND UNSETTING ENVIRONMENT VARIABLES
+```
+$ setenv NAME=PETER
+$ env
+SHELL=/data/data/com.termux/files/usr/bin/bash
+COLORTERM=truecolor
+HISTCONTROL=ignoreboth
+PREFIX=/data/data/com.termux/files/usr
+TERMUX_IS_DEBUGGABLE_BUILD=0
+TERMUX_MAIN_PACKAGE_FORMAT=debian
+PWD=/data/data/com.termux/files/home/ceejay/alx/simple_shell
+TERMUX_VERSION=0.118.0
+EXTERNAL_STORAGE=/sdcard
+LD_PRELOAD=/data/data/com.termux/files/usr/lib/libtermux-exec.so
+HOME=/data/data/com.termux/files/home
+LANG=en_US.UTF-8
+TERMUX_APK_RELEASE=F_DROID
+DEX2OATBOOTCLASSPATH=/apex/com.android.art/javalib/core-oj.jar:/apex/com.android.art/javalib/core-libart.jar:/apex/com.android.art/javalib/okhttp.jar:/apex/com.android.art/javalib/bouncycastle.jar:/apex/com.android.art/javalib/apache-xml.jar:/system/framework/framework.jar:/system/framework/framework-graphics.jar:/system/framework/ext.jar:/system/framework/telephony-common.jar:/system/framework/voip-common.jar:/system/framework/ims-common.jar:/apex/com.android.i18n/javalib/core-icu4j.jar:/system/framework/trans-framework.jar:/system/framework/mediatek-telephony-base.jar:/system/framework/mediatek-telephony-common.jar:/system/framework/mediatek-common.jar:/system/framework/mediatek-framework.jar:/system/framework/mediatek-ims-common.jar:/system/framework/mediatek-ims-base.jar:/system/framework/mediatek-telecom-common.jar
+TMPDIR=/data/data/com.termux/files/usr/tmp
+ANDROID_DATA=/data
+TERM=xterm-256color
+ANDROID_I18N_ROOT=/apex/com.android.i18n
+SHLVL=1
+ANDROID_ROOT=/system
+BOOTCLASSPATH=/apex/com.android.art/javalib/core-oj.jar:/apex/com.android.art/javalib/core-libart.jar:/apex/com.android.art/javalib/okhttp.jar:/apex/com.android.art/javalib/bouncycastle.jar:/apex/com.android.art/javalib/apache-xml.jar:/system/framework/framework.jar:/system/framework/framework-graphics.jar:/system/framework/ext.jar:/system/framework/telephony-common.jar:/system/framework/voip-common.jar:/system/framework/ims-common.jar:/apex/com.android.i18n/javalib/core-icu4j.jar:/system/framework/trans-framework.jar:/system/framework/mediatek-telephony-base.jar:/system/framework/mediatek-telephony-common.jar:/system/framework/mediatek-common.jar:/system/framework/mediatek-framework.jar:/system/framework/mediatek-ims-common.jar:/system/framework/mediatek-ims-base.jar:/system/framework/mediatek-telecom-common.jar:/apex/com.android.appsearch/javalib/framework-appsearch.jar:/apex/com.android.conscrypt/javalib/conscrypt.jar:/apex/com.android.ipsec/javalib/android.net.ipsec.ike.jar:/apex/com.android.media/javalib/updatable-media.jar:/apex/com.android.mediaprovider/javalib/framework-mediaprovider.jar:/apex/com.android.os.statsd/javalib/framework-statsd.jar:/apex/com.android.permission/javalib/framework-permission.jar:/apex/com.android.permission/javalib/framework-permission-s.jar:/apex/com.android.scheduling/javalib/framework-scheduling.jar:/apex/com.android.sdkext/javalib/framework-sdkextensions.jar:/apex/com.android.tethering/javalib/framework-connectivity.jar:/apex/com.android.tethering/javalib/framework-tethering.jar:/apex/com.android.wifi/javalib/framework-wifi.jar:/apex/com.transsion.mi.os.framework/javalib/os-framework.jar
+ANDROID_TZDATA_ROOT=/apex/com.android.tzdata
+TERMUX_APP_PID=4681
+PATH=/data/data/com.termux/files/usr/bin
+ANDROID_ART_ROOT=/apex/com.android.art
+OLDPWD=/data/data/com.termux/files/home
+_=./shell
+NAME=PETER
+$ unsetenv NAME
+$ env
+SHELL=/data/data/com.termux/files/usr/bin/bash
+COLORTERM=truecolor
+HISTCONTROL=ignoreboth
+PREFIX=/data/data/com.termux/files/usr
+TERMUX_IS_DEBUGGABLE_BUILD=0
+TERMUX_MAIN_PACKAGE_FORMAT=debian
+PWD=/data/data/com.termux/files/home/ceejay/alx/simple_shell
+TERMUX_VERSION=0.118.0
+EXTERNAL_STORAGE=/sdcard
+LD_PRELOAD=/data/data/com.termux/files/usr/lib/libtermux-exec.so
+HOME=/data/data/com.termux/files/home
+LANG=en_US.UTF-8
+TERMUX_APK_RELEASE=F_DROID
+DEX2OATBOOTCLASSPATH=/apex/com.android.art/javalib/core-oj.jar:/apex/com.android.art/javalib/core-libart.jar:/apex/com.android.art/javalib/okhttp.jar:/apex/com.android.art/javalib/bouncycastle.jar:/apex/com.android.art/javalib/apache-xml.jar:/system/framework/framework.jar:/system/framework/framework-graphics.jar:/system/framework/ext.jar:/system/framework/telephony-common.jar:/system/framework/voip-common.jar:/system/framework/ims-common.jar:/apex/com.android.i18n/javalib/core-icu4j.jar:/system/framework/trans-framework.jar:/system/framework/mediatek-telephony-base.jar:/system/framework/mediatek-telephony-common.jar:/system/framework/mediatek-common.jar:/system/framework/mediatek-framework.jar:/system/framework/mediatek-ims-common.jar:/system/framework/mediatek-ims-base.jar:/system/framework/mediatek-telecom-common.jar
+TMPDIR=/data/data/com.termux/files/usr/tmp
+ANDROID_DATA=/data
+TERM=xterm-256color
+ANDROID_I18N_ROOT=/apex/com.android.i18n
+SHLVL=1
+ANDROID_ROOT=/system
+BOOTCLASSPATH=/apex/com.android.art/javalib/core-oj.jar:/apex/com.android.art/javalib/core-libart.jar:/apex/com.android.art/javalib/okhttp.jar:/apex/com.android.art/javalib/bouncycastle.jar:/apex/com.android.art/javalib/apache-xml.jar:/system/framework/framework.jar:/system/framework/framework-graphics.jar:/system/framework/ext.jar:/system/framework/telephony-common.jar:/system/framework/voip-common.jar:/system/framework/ims-common.jar:/apex/com.android.i18n/javalib/core-icu4j.jar:/system/framework/trans-framework.jar:/system/framework/mediatek-telephony-base.jar:/system/framework/mediatek-telephony-common.jar:/system/framework/mediatek-common.jar:/system/framework/mediatek-framework.jar:/system/framework/mediatek-ims-common.jar:/system/framework/mediatek-ims-base.jar:/system/framework/mediatek-telecom-common.jar:/apex/com.android.appsearch/javalib/framework-appsearch.jar:/apex/com.android.conscrypt/javalib/conscrypt.jar:/apex/com.android.ipsec/javalib/android.net.ipsec.ike.jar:/apex/com.android.media/javalib/updatable-media.jar:/apex/com.android.mediaprovider/javalib/framework-mediaprovider.jar:/apex/com.android.os.statsd/javalib/framework-statsd.jar:/apex/com.android.permission/javalib/framework-permission.jar:/apex/com.android.permission/javalib/framework-permission-s.jar:/apex/com.android.scheduling/javalib/framework-scheduling.jar:/apex/com.android.sdkext/javalib/framework-sdkextensions.jar:/apex/com.android.tethering/javalib/framework-connectivity.jar:/apex/com.android.tethering/javalib/framework-tethering.jar:/apex/com.android.wifi/javalib/framework-wifi.jar:/apex/com.transsion.mi.os.framework/javalib/os-framework.jar
+ANDROID_TZDATA_ROOT=/apex/com.android.tzdata
+TERMUX_APP_PID=4681
+PATH=/data/data/com.termux/files/usr/bin
+ANDROID_ART_ROOT=/apex/com.android.art
+OLDPWD=/data/data/com.termux/files/home
+_=./shell
+```
