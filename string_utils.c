@@ -211,7 +211,10 @@ char *check_space(char *buffer)
 				flag = 0;
 				n = 0;
 				if (buffer[i] == c)
+				{
 					flag = 1;
+					continue;
+				}
 			}
 			else
 				flag = 1;
