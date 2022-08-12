@@ -1,0 +1,150 @@
+
+========== aliases2.c ==========
+aliases2.c:41: ERROR: trailing whitespace
+aliases2.c:45: ERROR: trailing whitespace
+total: 2 errors, 0 warnings, 142 lines checked
+search_alias
+print_aliases
+free_aliases
+get_alias
+sub_alias
+
+========== aliases.c ==========
+aliases.c:34: ERROR: trailing whitespace
+aliases.c:150: ERROR: trailing whitespace
+aliases.c:191: WARNING: More than 40 lines in a function
+aliases.c:191: ERROR: space required before the open parenthesis '('
+total: 3 errors, 1 warnings, 192 lines checked
+handle_alias
+store_aliases
+get_alias_name
+get_alias_value
+add_alias_to_list
+
+========== dir_cmds.c ==========
+handle_cd
+
+========== dispatch_cmd.c ==========
+dispatch_cmd.c:112: WARNING: More than 40 lines in a function
+dispatch_cmd.c:113: WARNING: More than 40 lines in a function
+dispatch_cmd.c:114: WARNING: More than 40 lines in a function
+dispatch_cmd.c:115: WARNING: More than 40 lines in a function
+dispatch_cmd.c:116: WARNING: More than 40 lines in a function
+dispatch_cmd.c:117: WARNING: More than 40 lines in a function
+dispatch_cmd.c:118: WARNING: More than 40 lines in a function
+dispatch_cmd.c:119: WARNING: More than 40 lines in a function
+total: 0 errors, 8 warnings, 162 lines checked
+dispatch
+parse_cmd
+re_init_arr
+parse_cmd_helper_1
+
+========== env_operations.c ==========
+handle_setenv
+handle_unsetenv
+print_env
+
+========== env_utils.c ==========
+get_env
+get_key_value
+increase_key_size
+increase_value_size
+free_argv
+
+========== execute_cmd.c ==========
+execute
+execute_helper
+
+========== free_and_init.c ==========
+re_initializer
+
+========== getline.c ==========
+_getline
+
+========== main.c ==========
+main.c:2: ERROR: global variables are not allowed
+main.c:3: ERROR: global variables are not allowed
+total: 2 errors, 0 warnings, 30 lines checked
+main
+
+========== map_function.c ==========
+map_cmd
+
+========== mem_management.c ==========
+alloc_str
+realloc_str
+alloc_str_arr
+free_args
+free_buffer
+
+========== quit_cmds.c ==========
+handle_exit
+check_alpha
+
+========== shell.c ==========
+shell.c:2: ERROR: global variables are not allowed
+shell.c:3: ERROR: global variables are not allowed
+shell.c:4: ERROR: global variables are not allowed
+shell.c:5: ERROR: global variables are not allowed
+shell.c:6: ERROR: global variables are not allowed
+total: 5 errors, 0 warnings, 111 lines checked
+shell
+handle_z
+handle_SIGINT
+handle_EXIT
+get_exit_code
+
+========== string_utils.c ==========
+string_utils.c:89: WARNING: More than 40 lines in a function
+string_utils.c:90: WARNING: More than 40 lines in a function
+string_utils.c:91: WARNING: More than 40 lines in a function
+string_utils.c:92: WARNING: More than 40 lines in a function
+string_utils.c:196: ERROR: spaces preferred around that '-' (ctx:VxV)
+string_utils.c:217: WARNING: More than 40 lines in a function
+string_utils.c:218: WARNING: More than 40 lines in a function
+string_utils.c:219: WARNING: More than 40 lines in a function
+string_utils.c:220: WARNING: More than 40 lines in a function
+string_utils.c:221: WARNING: More than 40 lines in a function
+string_utils.c:222: WARNING: More than 40 lines in a function
+string_utils.c:223: WARNING: More than 40 lines in a function
+string_utils.c:224: WARNING: More than 40 lines in a function
+string_utils.c:225: WARNING: More than 40 lines in a function
+string_utils.c:226: WARNING: More than 40 lines in a function
+string_utils.c:227: WARNING: More than 40 lines in a function
+string_utils.c:228: WARNING: More than 40 lines in a function
+total: 1 errors, 16 warnings, 229 lines checked
+strip
+split
+_itoa
+_strrev
+check_space
+
+========== variables_handler.c ==========
+variables_handler.c:88: WARNING: More than 40 lines in a function
+variables_handler.c:89: WARNING: More than 40 lines in a function
+variables_handler.c:90: WARNING: More than 40 lines in a function
+variables_handler.c:91: WARNING: More than 40 lines in a function
+variables_handler.c:92: WARNING: More than 40 lines in a function
+variables_handler.c:93: WARNING: More than 40 lines in a function
+variables_handler.c:94: WARNING: More than 40 lines in a function
+variables_handler.c:95: WARNING: More than 40 lines in a function
+variables_handler.c:96: WARNING: More than 40 lines in a function
+variables_handler.c:97: WARNING: More than 40 lines in a function
+variables_handler.c:98: WARNING: More than 40 lines in a function
+variables_handler.c:99: WARNING: More than 40 lines in a function
+variables_handler.c:100: WARNING: More than 40 lines in a function
+variables_handler.c:101: WARNING: More than 40 lines in a function
+variables_handler.c:102: WARNING: More than 40 lines in a function
+variables_handler.c:103: WARNING: More than 40 lines in a function
+variables_handler.c:104: WARNING: More than 40 lines in a function
+variables_handler.c:105: WARNING: More than 40 lines in a function
+total: 0 errors, 18 warnings, 106 lines checked
+variable_substitution
+check_for_variable
+
+========== verify_command.c ==========
+get_cmd_from_path
+split_path
+add_path
+check_path
+free_linked_path
