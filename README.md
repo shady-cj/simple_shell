@@ -511,3 +511,7 @@ aliases2.c          env_utils.c       main.h           shell.c           verify_
 /data/data/com.termux/files/home/ceejay/alx/simple_shell
 /data/data/com.termux/files/usr/bin
 ```
+
+### NOTE
+
+This shell does not implements all the regular shell functionality and should not be mistaken for the regular shell. It's just a simple clone that does the simple functionalities... some of the things it does not do include piping, redirection, single quotes and double quotes recognition... etc.. 
