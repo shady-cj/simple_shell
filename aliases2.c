@@ -127,7 +127,7 @@ char *sub_alias(char *buffer)
 	}
 	while (buffer[i])
 	{
-		if (k == size)
+		if (k == size - 2)
 		{
 			size += 40;
 			new = realloc_str(new, size);

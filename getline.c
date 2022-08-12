@@ -30,7 +30,7 @@ ssize_t _getline(char **buffer, size_t *buf_size, int STD)
 		{
 			continue;
 		}
-		if (input >= (ssize_t) *buf_size)
+		if (input >= (ssize_t) *buf_size - 2)
 		{
 			*buf_size += 4;
 			str = realloc_str(str, *buf_size);
