@@ -1,4 +1,3 @@
-
 ========== aliases2.c ==========
 aliases2.c:41: ERROR: trailing whitespace
 aliases2.c:45: ERROR: trailing whitespace
@@ -37,6 +36,7 @@ total: 0 errors, 8 warnings, 162 lines checked
 dispatch
 parse_cmd
 re_init_arr
+dispatch_cmd.c:147: warning: No description found for parameter or member 'flag'
 parse_cmd_helper_1
 
 ========== env_operations.c ==========
@@ -52,8 +52,11 @@ increase_value_size
 free_argv
 
 ========== execute_cmd.c ==========
+execute_cmd.c:51: ERROR: trailing whitespace
+total: 1 errors, 0 warnings, 90 lines checked
 execute
 execute_helper
+is_dir_check
 
 ========== free_and_init.c ==========
 re_initializer
@@ -62,9 +65,9 @@ re_initializer
 _getline
 
 ========== main.c ==========
-main.c:2: ERROR: global variables are not allowed
-main.c:3: ERROR: global variables are not allowed
-total: 2 errors, 0 warnings, 30 lines checked
+main.c:4: ERROR: global variables are not allowed
+main.c:5: ERROR: global variables are not allowed
+total: 2 errors, 0 warnings, 32 lines checked
 main
 
 ========== map_function.c ==========
@@ -82,12 +85,16 @@ handle_exit
 check_alpha
 
 ========== shell.c ==========
-shell.c:2: ERROR: global variables are not allowed
 shell.c:3: ERROR: global variables are not allowed
 shell.c:4: ERROR: global variables are not allowed
 shell.c:5: ERROR: global variables are not allowed
 shell.c:6: ERROR: global variables are not allowed
-total: 5 errors, 0 warnings, 111 lines checked
+shell.c:7: ERROR: global variables are not allowed
+shell.c:61: WARNING: More than 40 lines in a function
+shell.c:62: WARNING: More than 40 lines in a function
+shell.c:63: WARNING: More than 40 lines in a function
+shell.c:64: WARNING: More than 40 lines in a function
+total: 5 errors, 4 warnings, 111 lines checked
 shell
 handle_z
 handle_SIGINT
@@ -100,6 +107,7 @@ string_utils.c:90: WARNING: More than 40 lines in a function
 string_utils.c:91: WARNING: More than 40 lines in a function
 string_utils.c:92: WARNING: More than 40 lines in a function
 string_utils.c:196: ERROR: spaces preferred around that '-' (ctx:VxV)
+string_utils.c:207: WARNING: Too many leading tabs - consider code refactoring
 string_utils.c:217: WARNING: More than 40 lines in a function
 string_utils.c:218: WARNING: More than 40 lines in a function
 string_utils.c:219: WARNING: More than 40 lines in a function
@@ -112,7 +120,14 @@ string_utils.c:225: WARNING: More than 40 lines in a function
 string_utils.c:226: WARNING: More than 40 lines in a function
 string_utils.c:227: WARNING: More than 40 lines in a function
 string_utils.c:228: WARNING: More than 40 lines in a function
-total: 1 errors, 16 warnings, 229 lines checked
+string_utils.c:229: WARNING: More than 40 lines in a function
+string_utils.c:230: WARNING: More than 40 lines in a function
+string_utils.c:231: WARNING: More than 40 lines in a function
+string_utils.c:232: WARNING: More than 40 lines in a function
+string_utils.c:233: WARNING: More than 40 lines in a function
+string_utils.c:234: WARNING: More than 40 lines in a function
+string_utils.c:235: WARNING: More than 40 lines in a function
+total: 1 errors, 24 warnings, 236 lines checked
 strip
 split
 _itoa

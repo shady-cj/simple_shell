@@ -31,7 +31,6 @@ int store_aliases(char **argv)
 
 	while (argv[i])
 	{
-		
 		name = get_alias_name(argv[i], &sf);
 		value = get_alias_value(argv[i]);
 		if (name == NULL || value == NULL)
@@ -147,9 +146,8 @@ char *get_alias_value(char *str)
  * Return: 0 if sucessful and 1 if error
  */
 int add_alias_to_list(char *name, char *value)
-{	
-	alias *ptr;
-	alias *new;
+{
+	alias *ptr, *new;
 
 	if (alias_list_head == NULL)
 	{
@@ -188,5 +186,5 @@ int add_alias_to_list(char *name, char *value)
 	new->link = NULL;
 	ptr->link = new;
 	new = NULL;
-	return(0);
+	return (0);
 }

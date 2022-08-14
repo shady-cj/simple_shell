@@ -176,52 +176,30 @@ char *check_space(char *buffer)
 {
 	char *str, c;
 	size_t buf_size = 40, i = 0, j = 0;
-	int flag = 0, n = 0;
+	int flag = 0, n = 0, op;
 
 	str = malloc(sizeof(char) * buf_size);
 	if (str == NULL)
 		return (buffer);
 	while (buffer[i])
 	{
-		if (j == buf_size - 2)
-		{
-			buf_size += 20;
-			str = realloc(str, buf_size);
-			if (str == NULL)
-				return (buffer);
-		}
+		if ((str = check_buf_size(&buf_size, j, str))
+				== NULL)
+			return (buffer);
 		if (buffer[i] == '&' || buffer[i] == '|')
 		{
 			c = buffer[i];
-			if (buffer[i-1] != ' ')
+			if (buffer[i - 1] != ' ')
 			{
 				n = flag;
 				if (!flag)
 					str[j++] = ' ';
-				while (buffer[i] == c && n < 2 && buffer[i])
-				{
-					if (j == buf_size - 2)
-					{
-						buf_size += 20;
-						str = realloc(str, buf_size);
-						if (str == NULL)
-							return (buffer);
-					}
-					str[j++] = buffer[i];
-					i++;
-					n++;
-				}
-				if (buffer[i] == '\0')
+				op = separate_symbol(buffer, c, &n, &i, &j,
+					str, &flag, &buf_size);
+				if (op == 1)
+					return (buffer);
+				if (op == 2)
 					continue;
-				if (buffer[i] != ' ')
-					str[j++] = ' ';
-				flag = 0;
-				n = 0;
-				if (buffer[i] == c)
-				{
-					flag = 1;
-					continue;
-				}
 			}
 			else
 				flag = 1;

@@ -38,11 +38,10 @@ int print_aliases(void)
 
 	if (alias_list_head == NULL)
 		return (0);
-	
 	ptr = alias_list_head;
 	while (ptr)
 	{
-		printf("%s='%s'\n", ptr->name, ptr->value); 
+		printf("%s='%s'\n", ptr->name, ptr->value);
 		ptr = ptr->link;
 	}
 	return (0);

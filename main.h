@@ -158,4 +158,10 @@ char *sub_alias(char *buffer);
 char *get_alias(char *str);
 
 char *check_space(char *);
+
+
+
+char *check_buf_size(size_t *buf_size, size_t j, char *str);
+int separate_symbol(char *, char , int *,
+                size_t *, size_t *, char *, int *, size_t *);
 #endif
