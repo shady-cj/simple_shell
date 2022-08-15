@@ -21,6 +21,11 @@ Simply Run the executable file compile.sh
 ./compile.sh
 ./shell
 ```
+or with argument
+```
+./compile.sh hsh
+./hsh
+```
 ## GETTING TO KNOW THE FILES
  * main.c - This file contains main function that contains the main() function.. The function calls the shell() function
  * shell.c - This file contains a function that embodies the main shell... This function initiates the call to other helper functions in order for the shell to be function
@@ -515,3 +520,7 @@ aliases2.c          env_utils.c       main.h           shell.c           verify_
 ### NOTE
 
 This shell does not implements all the regular shell functionality and should not be mistaken for the regular shell. It's just a simple clone that does the simple functionalities... some of the things it does not do include piping, redirection, single quotes and double quotes recognition... etc.. 
+
+### IMPORTANT TO KNOW
+
+This shell was developed on a Linux environment thus behavior might be unpredictable on other operating systems...

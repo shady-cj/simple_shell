@@ -80,7 +80,7 @@ int parse_cmd(char **argv)
 			if (ret > 0 && !lor)
 				return (ret);
 			arr[j] = NULL;
-			if (type != 2)
+			if (type != 2 || (type == 2 && ret != 0))
 				ret = execute_helper(arr);
 			parse_cmd_helper_1(&j, &i, &type, &lor,
 					&arr[0], 1);
